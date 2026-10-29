@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Sign in · Brilliant AI</title>
+<link rel="icon" href="/assets/mark.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@600;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  * { box-sizing: border-box; }
+  body { margin: 0; min-height: 100vh; background: #0A0F2B; color: #fff; font-family: Inter, system-ui, sans-serif; display: flex; flex-direction: column; }
+  header { padding: 28px 32px; }
+  header img { height: 28px; display: block; }
+  main { flex: 1; display: flex; align-items: center; justify-content: center; padding: 32px; }
+  .card { width: 100%; max-width: 440px; display: flex; flex-direction: column; gap: 24px; }
+  h1 { font-family: Manrope, sans-serif; font-weight: 800; font-size: 40px; line-height: 1.1; letter-spacing: -0.02em; margin: 0; text-wrap: pretty; }
+  p { margin: 0; font-size: 17px; line-height: 1.55; color: rgba(255,255,255,.78); text-wrap: pretty; }
+  form { display: flex; flex-direction: column; gap: 12px; }
+  label { font-size: 14px; font-weight: 600; color: rgba(255,255,255,.85); }
+  input[type=email] { height: 52px; padding: 0 16px; border-radius: 10px; border: 1px solid rgba(255,255,255,.22); background: rgba(255,255,255,.06); color: #fff; font: inherit; font-size: 16px; }
+  input[type=email]:focus { outline: none; border-color: #00A8E8; box-shadow: 0 0 0 3px rgba(0,168,232,.3); }
+  button { height: 52px; border: 0; border-radius: 10px; background: #00A8E8; color: #0A0F2B; font-family: Manrope, sans-serif; font-weight: 800; font-size: 16px; cursor: pointer; }
+  button:hover { background: #33BAED; }
+  input[type=password] { height: 52px; padding: 0 16px; border-radius: 10px; border: 1px solid rgba(255,255,255,.22); background: rgba(255,255,255,.06); color: #fff; font: inherit; font-size: 16px; }
+  input[type=password]:focus { outline: none; border-color: #00A8E8; box-shadow: 0 0 0 3px rgba(0,168,232,.3); }
+  label[for=password] { margin-top: 8px; }
+  button { margin-top: 8px; }
+  .msg { display: none; padding: 14px 16px; border-radius: 10px; font-size: 15px; line-height: 1.5; }
+  .msg.ok { display: block; background: rgba(107,232,197,.12); border: 1px solid rgba(107,232,197,.5); color: #6BE8C5; }
+  .msg.err { display: block; background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.25); color: #fff; }
+</style>
+</head>
+<body>
+<header><img src="/assets/lockup-white.png" alt="Brilliant AI"></header>
+<main>
+  <div class="card">
+    <h1>Sign in to view the site</h1>
+    <p>Enter your email and the site password. If you're on the reviewer list, we'll email you a link to finish signing in.</p>
+    <div id="msg" class="msg" role="status"></div>
+    <form method="post" action="/api/request-link">
+      <label for="email">Email</label>
+      <input id="email" name="email" type="email" autocomplete="email" required>
+      <label for="password">Password</label>
+      <input id="password" name="password" type="password" autocomplete="current-password" required>
+      <input class="next" name="next" type="hidden" value="/">
+      <button type="submit">Continue</button>
+    </form>
+  </div>
+</main>
+<script>
+  var q = new URLSearchParams(location.search);
+  var msgs = {
+    sent: ['ok', "Check your inbox. The link works for one hour. It's sent by Airtable, so check your spam folder if it doesn't arrive."],
+    out: ['ok', "You're signed out."],
+    email: ['err', 'Enter a valid email address.'],
+    password: ['err', "That password isn't right. Try again."],
+    changed: ['err', 'The site password has changed. Sign in again with the new one.'],
+    expired: ['err', 'That link has expired. Request a new one below.'],
+    revoked: ['err', 'Your access has ended. Contact the Brilliant team if you need it again.'],
+    unavailable: ['err', "Sign-in isn't available right now. Try again in a few minutes."]
+  };
+  var m = q.get('sent') ? msgs.sent : q.get('out') ? msgs.out : msgs[q.get('error')];
+  if (m) { var el = document.getElementById('msg'); el.className = 'msg ' + m[0]; el.textContent = m[1]; }
+  if (q.get('next')) document.querySelectorAll('.next').forEach(function (i) { i.value = q.get('next'); });
+</script>
+</body>
+</html>
