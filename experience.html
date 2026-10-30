@@ -15,156 +15,148 @@
 <style>
 body{margin:0;background:#0A0F2B;color:#fff;font-family:Inter,system-ui,sans-serif;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
 a{color:#00A8E8;text-decoration:none}a:hover{color:#6BE8C5}
-[data-reveal]{transition:opacity .7s cubic-bezier(.4,0,.2,1),transform .7s cubic-bezier(.4,0,.2,1)}
-[data-reveal="0"]{opacity:0;transform:translateY(18px)}
-@media (prefers-reduced-motion: reduce){[data-reveal]{transition:none;opacity:1;transform:none}}
 </style>
 </helmet>
 
-<header style="position:sticky;top:0;z-index:20;background:rgba(10,15,43,.86);backdrop-filter:blur(14px);border-bottom:1px solid rgba(255,255,255,.08)">
-  <nav style="max-width:1280px;margin:0 auto;padding:0 32px;height:72px;display:flex;align-items:center;justify-content:space-between;gap:32px">
+<header style="position:sticky;top:0;z-index:20;background:rgba(10,15,43,.92);backdrop-filter:blur(14px);border-bottom:1px solid rgba(255,255,255,.08)">
+  <nav style="max-width:1280px;margin:0 auto;padding:0 clamp(20px,4vw,32px);height:72px;display:flex;align-items:center;justify-content:space-between;gap:32px">
     <a href="/" style="display:flex;align-items:center"><img src="/assets/lockup-white.png" alt="brilliant.ai" style="height:30px;display:block"></a>
     <sc-if value="{{ wide }}" hint-placeholder-val="{{ true }}">
-      <div style="display:flex;align-items:center;gap:36px;font-size:15px;font-weight:500;white-space:nowrap">
-        <a href="/" style="color:rgba(255,255,255,.72)" style-hover="color:#fff">Home</a>
-        <a href="/what-we-do" style="color:rgba(255,255,255,.72)" style-hover="color:#fff">What We Do</a>
-        <a href="/how-we-work" style="color:rgba(255,255,255,.72)" style-hover="color:#fff">How We Work</a>
-        <a href="/experience" style="color:#fff">Experience</a>
+      <div style="display:flex;align-items:center;gap:48px">
+        <div style="display:flex;align-items:center;gap:36px;font-size:15px;font-weight:500;white-space:nowrap">
+          <a href="/" style="color:rgba(255,255,255,.72)" style-hover="color:#fff">Home</a>
+          <a href="/what-we-do" style="color:rgba(255,255,255,.72)" style-hover="color:#fff">What We Do</a>
+          <a href="/how-we-work" style="color:rgba(255,255,255,.72)" style-hover="color:#fff">How We Work</a>
+          <a href="/experience" style="color:#fff">Experience</a>
+        </div>
+        <a href="#close" style="color:#fff;font-size:15px;font-weight:500;padding:11px 22px;border:1px solid rgba(255,255,255,.4);border-radius:999px;white-space:nowrap" style-hover="border-color:#6BE8C5;color:#6BE8C5">Bring us one problem</a>
       </div>
     </sc-if>
-    <a href="#close" style="color:#fff;font-size:15px;font-weight:500;padding:11px 22px;border:1px solid rgba(255,255,255,.4);border-radius:999px;white-space:nowrap" style-hover="border-color:#6BE8C5;color:#6BE8C5">Start a conversation</a>
+    <sc-if value="{{ narrow }}" hint-placeholder-val="{{ false }}">
+      <button onClick="{{ toggleMenu }}" aria-expanded="{{ menuOpen }}" style="height:44px;padding:0 18px;border:1px solid rgba(255,255,255,.4);border-radius:999px;background:transparent;color:#fff;font:500 15px Inter,system-ui,sans-serif;cursor:pointer">{{ menuLabel }}</button>
+    </sc-if>
   </nav>
+  <sc-if value="{{ menuOpen }}" hint-placeholder-val="{{ false }}">
+    <div style="border-top:1px solid rgba(255,255,255,.08);padding:8px clamp(20px,4vw,32px) 28px;display:grid">
+      <a href="/" onClick="{{ closeMenu }}" style="display:block;padding:14px 0;border-bottom:1px solid rgba(255,255,255,.08);font-family:Manrope,sans-serif;font-weight:700;font-size:20px;color:rgba(255,255,255,.78)">Home</a>
+      <a href="/what-we-do" onClick="{{ closeMenu }}" style="display:block;padding:14px 0;border-bottom:1px solid rgba(255,255,255,.08);font-family:Manrope,sans-serif;font-weight:700;font-size:20px;color:rgba(255,255,255,.78)">What We Do</a>
+      <a href="/how-we-work" onClick="{{ closeMenu }}" style="display:block;padding:14px 0;border-bottom:1px solid rgba(255,255,255,.08);font-family:Manrope,sans-serif;font-weight:700;font-size:20px;color:rgba(255,255,255,.78)">How We Work</a>
+      <a href="/experience" onClick="{{ closeMenu }}" style="display:block;padding:14px 0;border-bottom:1px solid rgba(255,255,255,.08);font-family:Manrope,sans-serif;font-weight:700;font-size:20px;color:#fff">Experience</a>
+      <a href="#close" onClick="{{ closeMenu }}" style="display:inline-block;background:#00A8E8;color:#0A0F2B;font-weight:600;font-size:16px;padding:15px 28px;border-radius:999px;margin-top:24px;text-align:center" style-hover="background:#6BE8C5;color:#0A0F2B">Bring us one problem</a>
+    </div>
+  </sc-if>
 </header>
 
 <section data-screen-label="Opening" style="position:relative;overflow:hidden">
   <img src="/assets/mark-outline.png" alt="" style="position:absolute;right:-40px;top:50%;transform:translateY(-50%);width:min(560px,60vw);height:auto;opacity:.08;pointer-events:none">
-  <div style="position:relative;max-width:1280px;margin:0 auto;padding:128px 32px 136px;box-sizing:border-box">
-    <h1 style="margin:0;max-width:900px;font-family:Manrope,sans-serif;font-weight:800;font-size:clamp(42px,5.2vw,68px);line-height:1.04;letter-spacing:-.03em;text-wrap:pretty">Workflows and agents we've <span style="color:#6BE8C5">built</span> inside the enterprise.</h1>
-    <p style="margin:40px 0 0;max-width:640px;font-size:18px;line-height:1.6;color:rgba(255,255,255,.8);text-wrap:pretty">The team has spent years turning operating problems into working systems: the workflow that runs the process, the agents that handle the repetitive judgment inside it, and the interface the operator actually uses. Across functions, across industries, on whatever platform the problem called for. What follows is a sample of that work.</p>
+  <div style="position:relative;max-width:1280px;margin:0 auto;padding:clamp(80px,10vw,124px) clamp(20px,4vw,32px);box-sizing:border-box">
+    <div style="font-size:13px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:#00A8E8">Experience</div>
+    <h1 style="margin:0;font-family:Manrope,sans-serif;font-weight:800;font-size:clamp(40px,5vw,64px);line-height:1.05;letter-spacing:-.03em;text-wrap:pretty;margin-top:24px;max-width:900px">Two decades solving operating problems inside the <span style="color:#6BE8C5">enterprise</span>.</h1>
+    <p style="margin:28px 0 0;max-width:660px;font-size:18px;line-height:1.6;color:rgba(255,255,255,.8);text-wrap:pretty;margin-top:36px">The platforms have changed. The job has not: understand the operation, build the system that runs it and stay accountable for the result. The experience on this page was gained by the team at other organizations, before Brilliant.</p>
   </div>
 </section>
 
-<section data-screen-label="What we've built" style="border-top:1px solid rgba(255,255,255,.08)">
-  <div style="max-width:1280px;margin:0 auto;padding:120px 32px 128px;box-sizing:border-box">
-    <h2 style="margin:0;max-width:820px;font-family:Manrope,sans-serif;font-weight:800;font-size:clamp(34px,3.8vw,50px);line-height:1.08;letter-spacing:-.03em">A sample of the work.</h2>
-    <div ref="{{ gridRef }}" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:24px;margin-top:72px">
-      <div data-reveal="{{ c1 }}" style="display:flex;flex-direction:column;border:1px solid rgba(255,255,255,.14);border-radius:4px;padding:32px 32px 28px">
-        <div style="display:flex;flex-wrap:wrap;gap:4px 10px;align-items:baseline;font-size:12px;letter-spacing:.12em;text-transform:uppercase;font-weight:500"><span style="color:#00A8E8">Supply chain</span><span style="color:rgba(255,255,255,.45)">· Industrial manufacturer</span></div>
-        <h3 style="margin:22px 0 0;font-family:Manrope,sans-serif;font-weight:700;font-size:23px;line-height:1.25;letter-spacing:-.015em">Exceptions queue</h3>
-        <p style="margin:14px 0 0;font-size:16px;line-height:1.6;color:rgba(255,255,255,.78);text-wrap:pretty">Reconciles orders, inventory and carrier status into one working queue so planners spend the day resolving problems instead of finding them. Rules handle the routine mismatches; people handle the ones that need judgment.</p>
-        <div style="margin-top:auto;padding-top:28px;font-size:14px;line-height:1.5;color:rgba(255,255,255,.5)">Systems: ERP, warehouse management, carrier feeds</div>
+<section data-screen-label="Before Brilliant" style="border-top:1px solid rgba(255,255,255,.08)">
+  <div style="max-width:1280px;margin:0 auto;padding:clamp(80px,10vw,124px) clamp(20px,4vw,32px);box-sizing:border-box">
+    <div style="font-size:13px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:#00A8E8">Before Brilliant · Other organizations</div>
+    <h2 style="margin:0;max-width:860px;font-family:Manrope,sans-serif;font-weight:800;font-size:clamp(32px,3.6vw,48px);line-height:1.08;letter-spacing:-.03em;text-wrap:pretty;margin-top:16px">Different platforms, the same job.</h2>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:48px 56px;margin-top:64px">
+      <div style="border-top:1px solid rgba(255,255,255,.14);padding-top:28px"><h3 style="margin:0;font-family:Manrope,sans-serif;font-weight:700;font-size:22px;line-height:1.25;letter-spacing:-.01em;text-wrap:pretty;font-size:24px">Oracle</h3><p style="margin:14px 0 0;font-size:17px;line-height:1.65;color:rgba(255,255,255,.78);text-wrap:pretty">At MarketSphere, the team ran one of Oracle's largest enterprise performance management partners in North America: financial consolidation, planning and forecasting, management reporting and close processes for Fortune 500 finance organizations.</p></div>
+      <div style="border-top:1px solid rgba(255,255,255,.14);padding-top:28px"><h3 style="margin:0;font-family:Manrope,sans-serif;font-weight:700;font-size:22px;line-height:1.25;letter-spacing:-.01em;text-wrap:pretty;font-size:24px">OneStream</h3><p style="margin:14px 0 0;font-size:17px;line-height:1.65;color:rgba(255,255,255,.78);text-wrap:pretty">At Black Diamond, the team helped large enterprises replace fragmented finance systems with OneStream's unified platform: consolidation, planning, account reconciliation and reporting, for global companies across North America and Europe.</p></div>
+      <div style="border-top:1px solid rgba(255,255,255,.14);padding-top:28px"><h3 style="margin:0;font-family:Manrope,sans-serif;font-weight:700;font-size:22px;line-height:1.25;letter-spacing:-.01em;text-wrap:pretty;font-size:24px">Airtable</h3><p style="margin:14px 0 0;font-size:17px;line-height:1.65;color:rgba(255,255,255,.78);text-wrap:pretty">At Airtable, the team took the same discipline outside finance, building custom workflow products for legal, product, marketing, operations and supply chain teams inside some of the largest enterprises in the world.</p></div>
+    </div>
+  </div>
+</section>
+
+<section data-screen-label="Workflows the team has built" style="background:#F3F5F8;color:#0A0F2B">
+  <div style="max-width:1280px;margin:0 auto;padding:clamp(80px,10vw,124px) clamp(20px,4vw,32px);box-sizing:border-box">
+    <h2 style="margin:0;max-width:860px;font-family:Manrope,sans-serif;font-weight:800;font-size:clamp(32px,3.6vw,48px);line-height:1.08;letter-spacing:-.03em;text-wrap:pretty">Workflows the team has built.</h2>
+    <p style="margin:28px 0 0;max-width:660px;font-size:18px;line-height:1.6;color:#3C4363;text-wrap:pretty">A sample of workflows built by members of the team in prior roles. Client names are withheld.</p>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:0 72px;margin-top:64px">
+      <div style="border-top:1px solid rgba(10,15,43,.18);padding:32px 0 40px;display:flex;flex-direction:column">
+        <div style="display:flex;flex-wrap:wrap;gap:4px 10px;font-size:12px;letter-spacing:.12em;text-transform:uppercase;font-weight:600"><span style="color:#0077B6">Supply chain</span><span style="color:#5A6180">· Industrial manufacturer</span></div>
+        <h3 style="margin:0;font-family:Manrope,sans-serif;font-weight:700;font-size:22px;line-height:1.25;letter-spacing:-.01em;text-wrap:pretty;margin-top:16px">Exceptions queue</h3>
+        <p style="margin:14px 0 0;font-size:17px;line-height:1.65;color:#3C4363;text-wrap:pretty;font-size:16px">Reconciled orders, inventory and carrier status into one working queue, so planners spent the day resolving problems instead of finding them. Rules handled routine mismatches; people handled the ones that needed judgment.</p>
+        <div style="margin-top:16px;font-size:14px;line-height:1.5;color:#5A6180">Systems: ERP, warehouse management, carrier feeds</div>
       </div>
-      <div data-reveal="{{ c2 }}" style="display:flex;flex-direction:column;border:1px solid rgba(255,255,255,.14);border-radius:4px;padding:32px 32px 28px">
-        <div style="display:flex;flex-wrap:wrap;gap:4px 10px;align-items:baseline;font-size:12px;letter-spacing:.12em;text-transform:uppercase;font-weight:500"><span style="color:#00A8E8">Finance</span><span style="color:rgba(255,255,255,.45)">· Multi-entity company</span></div>
-        <h3 style="margin:22px 0 0;font-family:Manrope,sans-serif;font-weight:700;font-size:23px;line-height:1.25;letter-spacing:-.015em">Close and consolidation</h3>
-        <p style="margin:14px 0 0;font-size:16px;line-height:1.6;color:rgba(255,255,255,.78);text-wrap:pretty">Redesigned the monthly close around the controller's calendar: intercompany matching, reconciliations and variance review moved into one workflow with the review steps and sign-offs built in.</p>
-        <div style="margin-top:auto;padding-top:28px;font-size:14px;line-height:1.5;color:rgba(255,255,255,.5)">Systems: ERP, consolidation platform, spreadsheets retired</div>
+      <div style="border-top:1px solid rgba(10,15,43,.18);padding:32px 0 40px;display:flex;flex-direction:column">
+        <div style="display:flex;flex-wrap:wrap;gap:4px 10px;font-size:12px;letter-spacing:.12em;text-transform:uppercase;font-weight:600"><span style="color:#0077B6">Finance</span><span style="color:#5A6180">· Multi-entity company</span></div>
+        <h3 style="margin:0;font-family:Manrope,sans-serif;font-weight:700;font-size:22px;line-height:1.25;letter-spacing:-.01em;text-wrap:pretty;margin-top:16px">Close and consolidation</h3>
+        <p style="margin:14px 0 0;font-size:17px;line-height:1.65;color:#3C4363;text-wrap:pretty;font-size:16px">Redesigned the monthly close around the controller's calendar: intercompany matching, reconciliations and variance review in one workflow, with review steps and sign-offs built in.</p>
+        <div style="margin-top:16px;font-size:14px;line-height:1.5;color:#5A6180">Systems: ERP, consolidation platform, spreadsheets retired</div>
       </div>
-      <div data-reveal="{{ c3 }}" style="display:flex;flex-direction:column;border:1px solid rgba(255,255,255,.14);border-radius:4px;padding:32px 32px 28px">
-        <div style="display:flex;flex-wrap:wrap;gap:4px 10px;align-items:baseline;font-size:12px;letter-spacing:.12em;text-transform:uppercase;font-weight:500"><span style="color:#00A8E8">Legal</span><span style="color:rgba(255,255,255,.45)">· Consumer company</span></div>
-        <h3 style="margin:22px 0 0;font-family:Manrope,sans-serif;font-weight:700;font-size:23px;line-height:1.25;letter-spacing:-.015em">Contract intake and routing</h3>
-        <p style="margin:14px 0 0;font-size:16px;line-height:1.6;color:rgba(255,255,255,.78);text-wrap:pretty">Captures the review judgment as rules: standard terms proceed, deviations route to the right reviewer with the deviation highlighted. The legal team reads only what needs reading.</p>
-        <div style="margin-top:auto;padding-top:28px;font-size:14px;line-height:1.5;color:rgba(255,255,255,.5)">Systems: Contract repository, e-signature, email</div>
+      <div style="border-top:1px solid rgba(10,15,43,.18);padding:32px 0 40px;display:flex;flex-direction:column">
+        <div style="display:flex;flex-wrap:wrap;gap:4px 10px;font-size:12px;letter-spacing:.12em;text-transform:uppercase;font-weight:600"><span style="color:#0077B6">Legal</span><span style="color:#5A6180">· Consumer company</span></div>
+        <h3 style="margin:0;font-family:Manrope,sans-serif;font-weight:700;font-size:22px;line-height:1.25;letter-spacing:-.01em;text-wrap:pretty;margin-top:16px">Contract intake and routing</h3>
+        <p style="margin:14px 0 0;font-size:17px;line-height:1.65;color:#3C4363;text-wrap:pretty;font-size:16px">Captured review judgment as rules: standard terms proceed, and deviations route to the right reviewer with the deviation highlighted.</p>
+        <div style="margin-top:16px;font-size:14px;line-height:1.5;color:#5A6180">Systems: Contract repository, e-signature, email</div>
       </div>
-      <div data-reveal="{{ c4 }}" style="display:flex;flex-direction:column;border:1px solid rgba(255,255,255,.14);border-radius:4px;padding:32px 32px 28px">
-        <div style="display:flex;flex-wrap:wrap;gap:4px 10px;align-items:baseline;font-size:12px;letter-spacing:.12em;text-transform:uppercase;font-weight:500"><span style="color:#00A8E8">Product</span><span style="color:rgba(255,255,255,.45)">· Software company</span></div>
-        <h3 style="margin:22px 0 0;font-family:Manrope,sans-serif;font-weight:700;font-size:23px;line-height:1.25;letter-spacing:-.015em">Customer ask intelligence</h3>
-        <p style="margin:14px 0 0;font-size:16px;line-height:1.6;color:rgba(255,255,255,.78);text-wrap:pretty">Captures recurring customer requests and workarounds from support and success conversations, categorizes them, sizes their impact, and gives product leadership a signal on what to build, standardize or push back on.</p>
-        <div style="margin-top:auto;padding-top:28px;font-size:14px;line-height:1.5;color:rgba(255,255,255,.5)">Systems: Support desk, CRM, product backlog</div>
+      <div style="border-top:1px solid rgba(10,15,43,.18);padding:32px 0 40px;display:flex;flex-direction:column">
+        <div style="display:flex;flex-wrap:wrap;gap:4px 10px;font-size:12px;letter-spacing:.12em;text-transform:uppercase;font-weight:600"><span style="color:#0077B6">Product</span><span style="color:#5A6180">· Software company</span></div>
+        <h3 style="margin:0;font-family:Manrope,sans-serif;font-weight:700;font-size:22px;line-height:1.25;letter-spacing:-.01em;text-wrap:pretty;margin-top:16px">Customer request intelligence</h3>
+        <p style="margin:14px 0 0;font-size:17px;line-height:1.65;color:#3C4363;text-wrap:pretty;font-size:16px">Captured recurring customer requests and workarounds from support and success conversations, categorized and sized them, and gave product leadership a signal on what to build, standardize or push back on.</p>
+        <div style="margin-top:16px;font-size:14px;line-height:1.5;color:#5A6180">Systems: Support desk, CRM, product backlog</div>
       </div>
-      <div data-reveal="{{ c5 }}" style="display:flex;flex-direction:column;border:1px solid rgba(255,255,255,.14);border-radius:4px;padding:32px 32px 28px">
-        <div style="display:flex;flex-wrap:wrap;gap:4px 10px;align-items:baseline;font-size:12px;letter-spacing:.12em;text-transform:uppercase;font-weight:500"><span style="color:#00A8E8">Operations</span><span style="color:rgba(255,255,255,.45)">· Retail company</span></div>
-        <h3 style="margin:22px 0 0;font-family:Manrope,sans-serif;font-weight:700;font-size:23px;line-height:1.25;letter-spacing:-.015em">Cross-team handoff tracking</h3>
-        <p style="margin:14px 0 0;font-size:16px;line-height:1.6;color:rgba(255,255,255,.78);text-wrap:pretty">Replaced the spreadsheet that tracked work moving between teams with a real system of record: ownership, status, due dates, and the handoffs that used to fall through the gap.</p>
-        <div style="margin-top:auto;padding-top:28px;font-size:14px;line-height:1.5;color:rgba(255,255,255,.5)">Systems: Spreadsheets retired, ticketing, shared drives</div>
+      <div style="border-top:1px solid rgba(10,15,43,.18);padding:32px 0 40px;display:flex;flex-direction:column">
+        <div style="display:flex;flex-wrap:wrap;gap:4px 10px;font-size:12px;letter-spacing:.12em;text-transform:uppercase;font-weight:600"><span style="color:#0077B6">Operations</span><span style="color:#5A6180">· Retail company</span></div>
+        <h3 style="margin:0;font-family:Manrope,sans-serif;font-weight:700;font-size:22px;line-height:1.25;letter-spacing:-.01em;text-wrap:pretty;margin-top:16px">Cross-team handoff tracking</h3>
+        <p style="margin:14px 0 0;font-size:17px;line-height:1.65;color:#3C4363;text-wrap:pretty;font-size:16px">Replaced the spreadsheet that tracked work moving between teams with a system of record: ownership, status, due dates and the handoffs that used to fall through the gap.</p>
+        <div style="margin-top:16px;font-size:14px;line-height:1.5;color:#5A6180">Systems: Spreadsheets retired, ticketing, shared drives</div>
       </div>
-      <div data-reveal="{{ c6 }}" style="display:flex;flex-direction:column;border:1px solid rgba(255,255,255,.14);border-radius:4px;padding:32px 32px 28px">
-        <div style="display:flex;flex-wrap:wrap;gap:4px 10px;align-items:baseline;font-size:12px;letter-spacing:.12em;text-transform:uppercase;font-weight:500"><span style="color:#00A8E8">Revenue operations</span><span style="color:rgba(255,255,255,.45)">· Services company</span></div>
-        <h3 style="margin:22px 0 0;font-family:Manrope,sans-serif;font-weight:700;font-size:23px;line-height:1.25;letter-spacing:-.015em">Quote and approval workflow</h3>
-        <p style="margin:14px 0 0;font-size:16px;line-height:1.6;color:rgba(255,255,255,.78);text-wrap:pretty">Moved pricing and quoting decisions out of spreadsheets into a workflow with the pricing rules encoded, approval thresholds enforced, and exceptions escalated with context.</p>
-        <div style="margin-top:auto;padding-top:28px;font-size:14px;line-height:1.5;color:rgba(255,255,255,.5)">Systems: CRM, pricing tables, quoting tools</div>
+      <div style="border-top:1px solid rgba(10,15,43,.18);padding:32px 0 40px;display:flex;flex-direction:column">
+        <div style="display:flex;flex-wrap:wrap;gap:4px 10px;font-size:12px;letter-spacing:.12em;text-transform:uppercase;font-weight:600"><span style="color:#0077B6">Revenue operations</span><span style="color:#5A6180">· Services company</span></div>
+        <h3 style="margin:0;font-family:Manrope,sans-serif;font-weight:700;font-size:22px;line-height:1.25;letter-spacing:-.01em;text-wrap:pretty;margin-top:16px">Quote and approval workflow</h3>
+        <p style="margin:14px 0 0;font-size:17px;line-height:1.65;color:#3C4363;text-wrap:pretty;font-size:16px">Moved pricing and quoting decisions out of spreadsheets into a workflow with pricing rules encoded, approval thresholds enforced and exceptions escalated with context.</p>
+        <div style="margin-top:16px;font-size:14px;line-height:1.5;color:#5A6180">Systems: CRM, pricing tables, quoting tools</div>
       </div>
     </div>
   </div>
 </section>
 
-<section data-screen-label="How we use AI" style="background:#F3F5F8;color:#0A0F2B">
-  <div style="max-width:1280px;margin:0 auto;padding:120px 32px 128px;box-sizing:border-box">
-    <h2 style="margin:0;max-width:900px;font-family:Manrope,sans-serif;font-weight:800;font-size:clamp(34px,3.8vw,50px);line-height:1.08;letter-spacing:-.03em;text-wrap:pretty">Agents where they earn it. Rules where they don't. People where it matters.</h2>
-    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:0 80px;margin-top:72px;max-width:1100px;border-bottom:1px solid rgba(10,15,43,.18)">
-      <div style="border-top:1px solid rgba(10,15,43,.18);padding:32px 0 40px">
-        <h3 style="margin:0;font-family:Manrope,sans-serif;font-weight:700;font-size:23px;line-height:1.25;letter-spacing:-.01em">Agents for repetitive judgment.</h3>
-        <p style="margin:14px 0 0;font-size:17px;line-height:1.65;color:#3C4363;text-wrap:pretty">Where a person is making the same kind of call hundreds of times a day and a mistake is recoverable, an agent does it and a person reviews the exceptions.</p>
-      </div>
-      <div style="border-top:1px solid rgba(10,15,43,.18);padding:32px 0 40px">
-        <h3 style="margin:0;font-family:Manrope,sans-serif;font-weight:700;font-size:23px;line-height:1.25;letter-spacing:-.01em">Rules for deterministic logic.</h3>
-        <p style="margin:14px 0 0;font-size:17px;line-height:1.65;color:#3C4363;text-wrap:pretty">Where the answer is knowable (thresholds, routing, matching) we write the rule. It is faster, cheaper and it never hallucinates.</p>
-      </div>
-      <div style="border-top:1px solid rgba(10,15,43,.18);padding:32px 0 40px">
-        <h3 style="margin:0;font-family:Manrope,sans-serif;font-weight:700;font-size:23px;line-height:1.25;letter-spacing:-.01em">People for the decisions that matter.</h3>
-        <p style="margin:14px 0 0;font-size:17px;line-height:1.65;color:#3C4363;text-wrap:pretty">Where the call carries real consequence, the system prepares the decision and a human makes it.</p>
-      </div>
-      <div style="border-top:1px solid rgba(10,15,43,.18);padding:32px 0 40px">
-        <h3 style="margin:0;font-family:Manrope,sans-serif;font-weight:700;font-size:23px;line-height:1.25;letter-spacing:-.01em">Evaluation and review from day one.</h3>
-        <p style="margin:14px 0 0;font-size:17px;line-height:1.65;color:#3C4363;text-wrap:pretty">Every agent ships with a way to measure whether it is right, and a path for a person to catch it when it isn't.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section data-screen-label="Where the team has worked">
-  <div style="max-width:1280px;margin:0 auto;padding:112px 32px;box-sizing:border-box">
-    <h2 style="margin:0;max-width:820px;font-family:Manrope,sans-serif;font-weight:800;font-size:clamp(34px,3.8vw,50px);line-height:1.08;letter-spacing:-.03em;text-wrap:pretty">Across the functions that run the business.</h2>
+<section data-screen-label="Functions and industries">
+  <div style="max-width:1280px;margin:0 auto;padding:clamp(80px,10vw,124px) clamp(20px,4vw,32px);box-sizing:border-box">
+    <h2 style="margin:0;max-width:860px;font-family:Manrope,sans-serif;font-weight:800;font-size:clamp(32px,3.6vw,48px);line-height:1.08;letter-spacing:-.03em;text-wrap:pretty">Across the functions that run the business.</h2>
     <div style="margin-top:56px;max-width:900px;display:grid">
-      <div style="display:flex;flex-wrap:wrap;gap:6px 20px;align-items:baseline;border-top:1px solid rgba(255,255,255,.12);padding:28px 0">
-        <span style="font-size:12px;font-weight:500;letter-spacing:.12em;text-transform:uppercase;color:#00A8E8;flex:0 0 96px">Functions</span>
+      <div style="display:flex;flex-wrap:wrap;gap:6px 20px;align-items:baseline;border-top:1px solid rgba(255,255,255,.14);padding:28px 0">
+        <span style="font-size:12px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:#00A8E8;flex:0 0 96px">Functions</span>
         <span style="font-size:17px;line-height:1.6;color:rgba(255,255,255,.85);flex:1 1 320px;text-wrap:pretty">Finance · Legal · Marketing · Product · Operations · Supply chain · Customer success · Revenue operations · Governance · Strategy</span>
       </div>
-      <div style="display:flex;flex-wrap:wrap;gap:6px 20px;align-items:baseline;border-top:1px solid rgba(255,255,255,.12);border-bottom:1px solid rgba(255,255,255,.12);padding:28px 0">
-        <span style="font-size:12px;font-weight:500;letter-spacing:.12em;text-transform:uppercase;color:#00A8E8;flex:0 0 96px">Industries</span>
+      <div style="display:flex;flex-wrap:wrap;gap:6px 20px;align-items:baseline;border-top:1px solid rgba(255,255,255,.14);border-bottom:1px solid rgba(255,255,255,.14);padding:28px 0">
+        <span style="font-size:12px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:#00A8E8;flex:0 0 96px">Industries</span>
         <span style="font-size:17px;line-height:1.6;color:rgba(255,255,255,.85);flex:1 1 320px;text-wrap:pretty">Retail and consumer · Financial services · Technology and software · Energy and industrials · Logistics · Media, entertainment and sports</span>
       </div>
     </div>
   </div>
 </section>
 
-<section data-screen-label="The technology has changed" style="border-top:1px solid rgba(255,255,255,.08)">
-  <div style="max-width:1280px;margin:0 auto;padding:120px 32px 128px;box-sizing:border-box">
-    <h2 style="margin:0;max-width:860px;font-family:Manrope,sans-serif;font-weight:800;font-size:clamp(34px,3.8vw,50px);line-height:1.08;letter-spacing:-.03em;text-wrap:pretty">The technology has changed. The work hasn't.</h2>
-    <p style="margin:28px 0 0;max-width:640px;font-size:18px;line-height:1.6;color:rgba(255,255,255,.8);text-wrap:pretty">For two decades the team has solved operating and finance problems inside the world's largest enterprises. The platforms underneath that work have changed. The job has not: understand the operation, build the system that runs it, stay accountable for the result.</p>
-    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:48px 56px;margin-top:72px">
-      <div style="border-top:1px solid rgba(255,255,255,.14);padding-top:28px">
-        <h3 style="margin:0;font-family:Manrope,sans-serif;font-weight:700;font-size:23px;line-height:1.25;letter-spacing:-.01em;color:#fff">Oracle</h3>
-        <p style="margin:18px 0 0;font-size:17px;line-height:1.65;color:rgba(255,255,255,.8);text-wrap:pretty">At MarketSphere, the team ran one of Oracle's largest enterprise performance management partners in North America. The work: financial consolidation, planning and forecasting, management reporting and close processes, rebuilt on Oracle for Fortune 500 finance organizations.</p>
-      </div>
-      <div style="border-top:1px solid rgba(255,255,255,.14);padding-top:28px">
-        <h3 style="margin:0;font-family:Manrope,sans-serif;font-weight:700;font-size:23px;line-height:1.25;letter-spacing:-.01em;color:#fff">OneStream</h3>
-        <p style="margin:18px 0 0;font-size:17px;line-height:1.65;color:rgba(255,255,255,.8);text-wrap:pretty">At Black Diamond, the team helped large enterprises replace fragmented finance systems with OneStream's unified platform: consolidation, planning, account reconciliation and reporting in one place, delivered to global companies across North America and Europe.</p>
-      </div>
-      <div style="border-top:1px solid rgba(255,255,255,.14);padding-top:28px">
-        <h3 style="margin:0;font-family:Manrope,sans-serif;font-weight:700;font-size:23px;line-height:1.25;letter-spacing:-.01em;color:#fff">Airtable</h3>
-        <p style="margin:18px 0 0;font-size:17px;line-height:1.65;color:rgba(255,255,255,.8);text-wrap:pretty">At Airtable, the team took the same discipline outside finance: custom workflow products for legal, product, marketing, operations and supply chain teams inside some of the largest enterprises in the world.</p>
+<section data-screen-label="Vendors and partners" style="border-top:1px solid rgba(255,255,255,.08)">
+  <div style="max-width:1280px;margin:0 auto;padding:clamp(80px,10vw,124px) clamp(20px,4vw,32px);box-sizing:border-box">
+    <div style="display:flex;flex-wrap:wrap;gap:32px 80px;align-items:flex-start">
+      <h2 style="margin:0;max-width:860px;font-family:Manrope,sans-serif;font-weight:800;font-size:clamp(32px,3.6vw,48px);line-height:1.08;letter-spacing:-.03em;text-wrap:pretty;flex:1 1 380px;max-width:520px">Working alongside your vendors and partners.</h2>
+      <div style="flex:1 1 420px;max-width:640px">
+        <p style="margin:0;font-size:18px;line-height:1.65;color:rgba(255,255,255,.82);text-wrap:pretty">Operating problems rarely sit inside one system. When yours spans several, we work with the software vendors and services partners already involved: agreeing who owns each part, coordinating changes across systems and keeping the workflow working from end to end.</p>
+        <p style="margin:14px 0 0;font-size:17px;line-height:1.65;color:rgba(255,255,255,.78);text-wrap:pretty;font-size:18px;margin-top:16px">We recommend adding a vendor only when it's the better option, and we tell you about any relevant commercial relationships.</p>
       </div>
     </div>
-    <p style="margin:80px 0 0;max-width:860px;font-family:Manrope,sans-serif;font-weight:700;font-size:clamp(22px,2.2vw,28px);line-height:1.3;letter-spacing:-.015em">Different platforms, same clients, same job.</p>
   </div>
 </section>
 
 <section id="close" data-screen-label="Close" style="border-top:1px solid rgba(255,255,255,.08)">
-  <div style="max-width:1280px;margin:0 auto;padding:128px 32px;box-sizing:border-box">
-    <h2 style="margin:0;max-width:860px;font-family:Manrope,sans-serif;font-weight:800;font-size:clamp(36px,4.4vw,58px);line-height:1.06;letter-spacing:-.03em;text-wrap:pretty">Bring us the problem you know best.</h2>
+  <div style="max-width:1280px;margin:0 auto;padding:clamp(80px,10vw,124px) clamp(20px,4vw,32px);box-sizing:border-box">
+    <h2 style="margin:0;max-width:860px;font-family:Manrope,sans-serif;font-weight:800;font-size:clamp(32px,3.6vw,48px);line-height:1.08;letter-spacing:-.03em;text-wrap:pretty;font-size:clamp(36px,4.4vw,58px);line-height:1.06">Bring us the problem you know best.</h2>
+    <p style="margin:28px 0 0;max-width:660px;font-size:18px;line-height:1.6;color:rgba(255,255,255,.8);text-wrap:pretty">You don't need to know the exact cost, the owner or the technical answer yet. The first conversation is about understanding the problem: where work is slow or costly, who it affects and which systems are involved. From there, we'll recommend the right next step.</p>
     <div style="margin-top:40px;display:flex;flex-wrap:wrap;align-items:center;gap:20px 36px">
-      <a href="mailto:hello@brilliant.ai" style="display:inline-block;background:#00A8E8;color:#0A0F2B;font-weight:600;font-size:16px;padding:15px 28px;border-radius:999px" style-hover="background:#6BE8C5;color:#0A0F2B">Bring us one problem</a>
-      <a href="/how-we-work" style="font-size:17px;font-weight:500;color:#00A8E8" style-hover="color:#6BE8C5">See how we work →</a>
+      <a href="mailto:hello@brilliant.ai?subject=One%20problem" style="display:inline-block;background:#00A8E8;color:#0A0F2B;font-weight:600;font-size:16px;padding:15px 28px;border-radius:999px" style-hover="background:#6BE8C5;color:#0A0F2B">Bring us one problem</a>
+      <a href="mailto:hello@brilliant.ai" style="font-size:17px;font-weight:500;color:#00A8E8" style-hover="color:#6BE8C5">hello@brilliant.ai</a>
     </div>
   </div>
 </section>
 
 <footer style="border-top:1px solid rgba(255,255,255,.1)">
-  <div style="max-width:1280px;margin:0 auto;padding:48px 32px 56px;box-sizing:border-box;display:flex;flex-wrap:wrap;gap:32px 64px;align-items:flex-start;justify-content:space-between">
+  <div style="max-width:1280px;margin:0 auto;padding:48px clamp(20px,4vw,32px) 56px;box-sizing:border-box;display:flex;flex-wrap:wrap;gap:32px 64px;align-items:flex-start;justify-content:space-between">
     <div style="flex:1 1 320px;min-width:0;max-width:420px">
       <img src="/assets/lockup-white.png" alt="brilliant.ai" style="height:26px;display:block">
-      <p style="margin:18px 0 0;font-size:15px;line-height:1.55;color:rgba(255,255,255,.62);text-wrap:pretty">Rebuilding the workflows behind the enterprise's biggest problems.</p>
+      <p style="margin:18px 0 0;font-size:15px;line-height:1.55;color:rgba(255,255,255,.66);text-wrap:pretty">Platform first. AI forward. Rebuilding the workflows behind known operating problems.</p>
     </div>
     <div style="display:flex;flex-wrap:wrap;gap:16px 32px;font-size:15px;align-items:center">
       <a href="/" style="color:rgba(255,255,255,.72)" style-hover="color:#fff">Home</a>
@@ -179,36 +171,28 @@ a{color:#00A8E8;text-decoration:none}a:hover{color:#6BE8C5}
   </div>
 </footer>
 </x-dc>
-<script type="text/x-dc" data-dc-script data-props="{&quot;revealOnScroll&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Build cards&quot;}}">
+<script type="text/x-dc" data-dc-script data-props="{&quot;revealOnScroll&quot;:{&quot;editor&quot;:null,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;}}">
 class Component extends DCLogic {
-  state = { wide: true, reveal: 0 };
-  gridRef = React.createRef();
+  state = { wide: typeof window !== 'undefined' ? window.matchMedia('(min-width: 1040px)').matches : true, menu: false };
   componentDidMount() {
     this.mq = window.matchMedia('(min-width: 1040px)');
-    this.onResize = () => { const w = this.mq.matches; if (w !== this.state.wide) this.setState({ wide: w }); };
-    this.mq.addEventListener('change', this.onResize);
-    window.addEventListener('resize', this.onResize);
-    this.onResize();
-    const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    const run = () => {
-      if (this.started) return; this.started = true;
-      if (reduce) { this.setState({ reveal: 6 }); return; }
-      [1, 2, 3, 4, 5, 6].forEach((n, i) => setTimeout(() => this.setState({ reveal: n }), 100 + i * 140));
-    };
-    if ('IntersectionObserver' in window && this.gridRef.current) {
-      this.io = new IntersectionObserver(es => { if (es.some(e => e.isIntersecting)) { run(); this.io.disconnect(); } }, { threshold: 0.1 });
-      this.io.observe(this.gridRef.current);
-    } else run();
+    this.onMq = () => { const w = this.mq.matches; if (w !== this.state.wide) this.setState({ wide: w, menu: false }); if (this.onScroll) this.onScroll(); };
+    this.mq.addEventListener('change', this.onMq);
+    window.addEventListener('resize', this.onMq);
+    this.onMq();
   }
   componentWillUnmount() {
-    this.mq && this.mq.removeEventListener('change', this.onResize);
-    window.removeEventListener('resize', this.onResize);
-    this.io && this.io.disconnect();
+    this.mq && this.mq.removeEventListener('change', this.onMq);
+    window.removeEventListener('resize', this.onMq);
   }
   renderVals() {
-    const r = this.state.reveal, on = this.props.revealOnScroll ?? true;
-    const v = n => (!on || r >= n) ? '1' : '0';
-    return { wide: this.state.wide, gridRef: this.gridRef, c1: v(1), c2: v(2), c3: v(3), c4: v(4), c5: v(5), c6: v(6) };
+    const wide = this.state.wide, menuOpen = this.state.menu && !wide;
+    return Object.assign({
+      wide, narrow: !wide, menuOpen,
+      menuLabel: menuOpen ? 'Close' : 'Menu',
+      toggleMenu: () => this.setState(s => ({ menu: !s.menu })),
+      closeMenu: () => this.setState({ menu: false })
+    }, {});
   }
 }
 </script>

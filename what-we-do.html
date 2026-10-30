@@ -23,97 +23,157 @@ a{color:#00A8E8;text-decoration:none}a:hover{color:#6BE8C5}
 </style>
 </helmet>
 
-<header style="position:sticky;top:0;z-index:20;background:rgba(10,15,43,.86);backdrop-filter:blur(14px);border-bottom:1px solid rgba(255,255,255,.08)">
-  <nav style="max-width:1280px;margin:0 auto;padding:0 32px;height:72px;display:flex;align-items:center;justify-content:space-between;gap:32px">
+<header style="position:sticky;top:0;z-index:20;background:rgba(10,15,43,.92);backdrop-filter:blur(14px);border-bottom:1px solid rgba(255,255,255,.08)">
+  <nav style="max-width:1280px;margin:0 auto;padding:0 clamp(20px,4vw,32px);height:72px;display:flex;align-items:center;justify-content:space-between;gap:32px">
     <a href="/" style="display:flex;align-items:center"><img src="/assets/lockup-white.png" alt="brilliant.ai" style="height:30px;display:block"></a>
     <sc-if value="{{ wide }}" hint-placeholder-val="{{ true }}">
-      <div style="display:flex;align-items:center;gap:36px;font-size:15px;font-weight:500;white-space:nowrap">
-        <a href="/" style="color:rgba(255,255,255,.72)" style-hover="color:#fff">Home</a>
-        <a href="/what-we-do" style="color:#fff">What We Do</a>
-        <a href="/how-we-work" style="color:rgba(255,255,255,.72)" style-hover="color:#fff">How We Work</a>
-        <a href="/experience" style="color:rgba(255,255,255,.72)" style-hover="color:#fff">Experience</a>
+      <div style="display:flex;align-items:center;gap:48px">
+        <div style="display:flex;align-items:center;gap:36px;font-size:15px;font-weight:500;white-space:nowrap">
+          <a href="/" style="color:rgba(255,255,255,.72)" style-hover="color:#fff">Home</a>
+          <a href="/what-we-do" style="color:#fff">What We Do</a>
+          <a href="/how-we-work" style="color:rgba(255,255,255,.72)" style-hover="color:#fff">How We Work</a>
+          <a href="/experience" style="color:rgba(255,255,255,.72)" style-hover="color:#fff">Experience</a>
+        </div>
+        <a href="#close" style="color:#fff;font-size:15px;font-weight:500;padding:11px 22px;border:1px solid rgba(255,255,255,.4);border-radius:999px;white-space:nowrap" style-hover="border-color:#6BE8C5;color:#6BE8C5">Bring us one problem</a>
       </div>
     </sc-if>
-    <a href="#close" style="color:#fff;font-size:15px;font-weight:500;padding:11px 22px;border:1px solid rgba(255,255,255,.4);border-radius:999px;white-space:nowrap" style-hover="border-color:#6BE8C5;color:#6BE8C5">Start a conversation</a>
+    <sc-if value="{{ narrow }}" hint-placeholder-val="{{ false }}">
+      <button onClick="{{ toggleMenu }}" aria-expanded="{{ menuOpen }}" style="height:44px;padding:0 18px;border:1px solid rgba(255,255,255,.4);border-radius:999px;background:transparent;color:#fff;font:500 15px Inter,system-ui,sans-serif;cursor:pointer">{{ menuLabel }}</button>
+    </sc-if>
   </nav>
+  <sc-if value="{{ menuOpen }}" hint-placeholder-val="{{ false }}">
+    <div style="border-top:1px solid rgba(255,255,255,.08);padding:8px clamp(20px,4vw,32px) 28px;display:grid">
+      <a href="/" onClick="{{ closeMenu }}" style="display:block;padding:14px 0;border-bottom:1px solid rgba(255,255,255,.08);font-family:Manrope,sans-serif;font-weight:700;font-size:20px;color:rgba(255,255,255,.78)">Home</a>
+      <a href="/what-we-do" onClick="{{ closeMenu }}" style="display:block;padding:14px 0;border-bottom:1px solid rgba(255,255,255,.08);font-family:Manrope,sans-serif;font-weight:700;font-size:20px;color:#fff">What We Do</a>
+      <a href="/how-we-work" onClick="{{ closeMenu }}" style="display:block;padding:14px 0;border-bottom:1px solid rgba(255,255,255,.08);font-family:Manrope,sans-serif;font-weight:700;font-size:20px;color:rgba(255,255,255,.78)">How We Work</a>
+      <a href="/experience" onClick="{{ closeMenu }}" style="display:block;padding:14px 0;border-bottom:1px solid rgba(255,255,255,.08);font-family:Manrope,sans-serif;font-weight:700;font-size:20px;color:rgba(255,255,255,.78)">Experience</a>
+      <a href="#close" onClick="{{ closeMenu }}" style="display:inline-block;background:#00A8E8;color:#0A0F2B;font-weight:600;font-size:16px;padding:15px 28px;border-radius:999px;margin-top:24px;text-align:center" style-hover="background:#6BE8C5;color:#0A0F2B">Bring us one problem</a>
+    </div>
+  </sc-if>
 </header>
 
 <section data-screen-label="Opening" style="position:relative;overflow:hidden">
   <img src="/assets/mark-outline.png" alt="" style="position:absolute;right:-40px;top:50%;transform:translateY(-50%);width:min(560px,60vw);height:auto;opacity:.08;pointer-events:none">
-  <div style="position:relative;max-width:1280px;margin:0 auto;padding:128px 32px 136px;box-sizing:border-box">
-    <h1 style="margin:0;max-width:860px;font-family:Manrope,sans-serif;font-weight:800;font-size:clamp(42px,5.2vw,68px);line-height:1.04;letter-spacing:-.03em;text-wrap:pretty">We rebuild the <span style="color:#6BE8C5">workflow</span> behind your biggest operating problem.</h1>
-    <p style="margin:40px 0 0;max-width:640px;font-size:18px;line-height:1.6;color:rgba(255,255,255,.8);text-wrap:pretty">A workflow is the chain of people, decisions, systems, data and exceptions that turns work into a result. Behind almost every problem an operator has lived with for years, there is one of these chains that was built for a different scale or a different era of technology. Brilliant takes the workflow behind a problem you already know, redesigns it, builds it on the systems you already run, and delivers it as a working product the people doing the work will actually use.</p>
+  <div style="position:relative;max-width:1280px;margin:0 auto;padding:clamp(80px,10vw,124px) clamp(20px,4vw,32px);box-sizing:border-box">
+    <div style="font-size:13px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:#00A8E8">Platform first. AI forward.</div>
+    <h1 style="margin:0;font-family:Manrope,sans-serif;font-weight:800;font-size:clamp(40px,5vw,64px);line-height:1.05;letter-spacing:-.03em;text-wrap:pretty;margin-top:24px;max-width:900px">We rebuild the <span style="color:#6BE8C5">workflows</span> behind known operating problems.</h1>
+    <p style="margin:28px 0 0;max-width:660px;font-size:18px;line-height:1.6;color:rgba(255,255,255,.8);text-wrap:pretty;margin-top:36px">A workflow is the chain of people, decisions, systems and data that turns work into a result. Many were built for a different scale or an earlier generation of technology. We learn how yours runs, prepare the data and process underneath it, and build a working solution from the right combination of existing systems, integrations, automation, AI and custom interfaces.</p>
   </div>
 </section>
 
-<section data-screen-label="What we deliver" style="background:#F3F5F8;color:#0A0F2B">
-  <div style="max-width:1280px;margin:0 auto;padding:120px 32px 128px;box-sizing:border-box">
-    <h2 style="margin:0;max-width:820px;font-family:Manrope,sans-serif;font-weight:800;font-size:clamp(34px,3.8vw,50px);line-height:1.08;letter-spacing:-.03em;text-wrap:pretty">Three things you can point to.</h2>
-    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:48px 56px;margin-top:72px">
+<section data-screen-label="Platform first. AI forward." style="background:#F3F5F8;color:#0A0F2B">
+  <div style="max-width:1280px;margin:0 auto;padding:clamp(80px,10vw,124px) clamp(20px,4vw,32px);box-sizing:border-box">
+    <h2 style="margin:0;max-width:860px;font-family:Manrope,sans-serif;font-weight:800;font-size:clamp(32px,3.6vw,48px);line-height:1.08;letter-spacing:-.03em;text-wrap:pretty">Platform first. AI forward.</h2>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:40px 80px;margin-top:64px">
       <div style="border-top:1px solid rgba(10,15,43,.18);padding-top:28px">
-        <h3 style="margin:0;font-family:Manrope,sans-serif;font-weight:700;font-size:23px;line-height:1.25;letter-spacing:-.01em">A working product.</h3>
-        <p style="margin:16px 0 0;font-size:17px;line-height:1.65;color:#3C4363;text-wrap:pretty">An interface for the people doing the work — the queue, the review screen, the decision support — built around how the operation actually runs. Not a dashboard. Not a slide.</p>
+        <div style="font-size:13px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:#0077B6">Platform first</div>
+        <p style="margin:14px 0 0;font-size:17px;line-height:1.65;color:#3C4363;text-wrap:pretty;margin-top:12px">The right operational foundation: connected systems, trustworthy data, clear workflows, business rules and an interface people can actually use. We assess the technology you already own and determine what needs to be improved, connected or built.</p>
+        <p style="margin:14px 0 0;font-size:17px;line-height:1.65;color:#3C4363;text-wrap:pretty">It doesn't mean choosing technology before we understand the problem, or asking you to buy a new platform.</p>
       </div>
       <div style="border-top:1px solid rgba(10,15,43,.18);padding-top:28px">
-        <h3 style="margin:0;font-family:Manrope,sans-serif;font-weight:700;font-size:23px;line-height:1.25;letter-spacing:-.01em">The connections behind it.</h3>
-        <p style="margin:16px 0 0;font-size:17px;line-height:1.65;color:#3C4363;text-wrap:pretty">Your systems of record wired to the workflow layer, with the AI the process needs sitting inside it, and controls the enterprise can govern.</p>
+        <div style="font-size:13px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:#0077B6">AI forward</div>
+        <p style="margin:14px 0 0;font-size:17px;line-height:1.65;color:#3C4363;text-wrap:pretty;margin-top:12px">We actively look for where AI can improve the solution, and design the foundation so those capabilities can evolve.</p>
+        <p style="margin:14px 0 0;font-size:17px;line-height:1.65;color:#3C4363;text-wrap:pretty">Much of the work is better use of platforms, integrations and automation. AI expands what's possible as one part of the solution, applied where it makes a measurable difference.</p>
       </div>
-      <div style="border-top:1px solid rgba(10,15,43,.18);padding-top:28px">
-        <h3 style="margin:0;font-family:Manrope,sans-serif;font-weight:700;font-size:23px;line-height:1.25;letter-spacing:-.01em">A number that is measured.</h3>
-        <p style="margin:16px 0 0;font-size:17px;line-height:1.65;color:#3C4363;text-wrap:pretty">The result reported against the baseline you agreed to, every quarter, by us.</p>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:40px 56px;margin-top:72px">
+      <div style="border-top:1px solid rgba(10,15,43,.18);padding-top:24px"><h3 style="margin:0;font-family:Manrope,sans-serif;font-weight:700;font-size:22px;line-height:1.25;letter-spacing:-.01em;text-wrap:pretty">Rules for predictable tasks.</h3><p style="margin:14px 0 0;font-size:17px;line-height:1.65;color:#3C4363;text-wrap:pretty;font-size:16px">Thresholds, routing and matching. Where the answer is knowable, a rule is faster, cheaper and consistent.</p></div>
+      <div style="border-top:1px solid rgba(10,15,43,.18);padding-top:24px"><h3 style="margin:0;font-family:Manrope,sans-serif;font-weight:700;font-size:22px;line-height:1.25;letter-spacing:-.01em;text-wrap:pretty">AI where interpretation or synthesis adds value.</h3><p style="margin:14px 0 0;font-size:17px;line-height:1.65;color:#3C4363;text-wrap:pretty;font-size:16px">Reading documents, summarizing cases, explaining variances. Each use is evaluated, and a person can review and correct it.</p></div>
+      <div style="border-top:1px solid rgba(10,15,43,.18);padding-top:24px"><h3 style="margin:0;font-family:Manrope,sans-serif;font-weight:700;font-size:22px;line-height:1.25;letter-spacing:-.01em;text-wrap:pretty">People where judgment and accountability matter.</h3><p style="margin:14px 0 0;font-size:17px;line-height:1.65;color:#3C4363;text-wrap:pretty;font-size:16px">The system prepares the decision and a person makes it.</p></div>
+    </div>
+  </div>
+</section>
+
+<section data-screen-label="What you receive">
+  <div style="max-width:1280px;margin:0 auto;padding:clamp(80px,10vw,124px) clamp(20px,4vw,32px);box-sizing:border-box">
+    <h2 style="margin:0;max-width:860px;font-family:Manrope,sans-serif;font-weight:800;font-size:clamp(32px,3.6vw,48px);line-height:1.08;letter-spacing:-.03em;text-wrap:pretty">What you receive.</h2>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:48px 56px;margin-top:64px">
+      <div style="border-top:1px solid rgba(255,255,255,.14);padding-top:28px"><h3 style="margin:0;font-family:Manrope,sans-serif;font-weight:700;font-size:22px;line-height:1.25;letter-spacing:-.01em;text-wrap:pretty;font-size:24px">A working product.</h3><p style="margin:14px 0 0;font-size:17px;line-height:1.65;color:rgba(255,255,255,.78);text-wrap:pretty">The interface the people doing the work actually use: the queue, the review screen, the decision support. Built around how the operation runs.</p></div>
+      <div style="border-top:1px solid rgba(255,255,255,.14);padding-top:28px"><h3 style="margin:0;font-family:Manrope,sans-serif;font-weight:700;font-size:22px;line-height:1.25;letter-spacing:-.01em;text-wrap:pretty;font-size:24px">The connections behind it.</h3><p style="margin:14px 0 0;font-size:17px;line-height:1.65;color:rgba(255,255,255,.78);text-wrap:pretty">Your systems, data, rules, automation and AI working together, with access and controls your enterprise can govern.</p></div>
+      <div style="border-top:1px solid rgba(255,255,255,.14);padding-top:28px"><h3 style="margin:0;font-family:Manrope,sans-serif;font-weight:700;font-size:22px;line-height:1.25;letter-spacing:-.01em;text-wrap:pretty;font-size:24px">A measured result.</h3><p style="margin:14px 0 0;font-size:17px;line-height:1.65;color:rgba(255,255,255,.78);text-wrap:pretty">Performance tracked against a baseline agreed with you, so you can see what changed.</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="offerings" data-screen-label="Offerings" style="background:#F3F5F8;color:#0A0F2B">
+  <div style="max-width:1280px;margin:0 auto;padding:clamp(80px,10vw,124px) clamp(20px,4vw,32px);box-sizing:border-box">
+    <h2 style="margin:0;max-width:860px;font-family:Manrope,sans-serif;font-weight:800;font-size:clamp(32px,3.6vw,48px);line-height:1.08;letter-spacing:-.03em;text-wrap:pretty">Three ways to work with us.</h2>
+    <p style="margin:28px 0 0;max-width:660px;font-size:18px;line-height:1.6;color:#3C4363;text-wrap:pretty">Each engagement leads into the next. You can start with any of them, and most relationships move through all three, then begin again with the next workflow.</p>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:56px 0;margin-top:72px">
+      <div style="padding-right:40px;display:flex;flex-direction:column">
+        <div style="display:flex;align-items:center">
+          <span style="flex:none;width:11px;height:11px;border-radius:50%;background:#00A8E8"></span>
+          <span style="flex:1;height:1px;background:#00A8E8"></span>
+        </div>
+        <div style="margin-top:24px;font-size:13px;font-weight:600;letter-spacing:.12em;color:#0077B6">01</div>
+        <h3 style="margin:0;font-family:Manrope,sans-serif;font-weight:700;font-size:22px;line-height:1.25;letter-spacing:-.01em;text-wrap:pretty;margin-top:8px;font-size:26px">Understand &amp; Scope</h3>
+        <p style="margin:14px 0 0;font-size:17px;line-height:1.65;color:#3C4363;text-wrap:pretty">For when the problem is clear but the cause, the impact or the solution is not.</p>
+        <ul style="margin:20px 0 0;padding:0;list-style:none;display:grid;gap:10px">
+          <li style="display:flex;gap:12px;font-size:16px;line-height:1.5;color:#0A0F2B"><span style="flex:none;width:6px;height:6px;margin-top:9px;border-radius:50%;background:#0077B6"></span><span>Map the workflow as it actually runs</span></li>
+          <li style="display:flex;gap:12px;font-size:16px;line-height:1.5;color:#0A0F2B"><span style="flex:none;width:6px;height:6px;margin-top:9px;border-radius:50%;background:#0077B6"></span><span>Identify root causes</span></li>
+          <li style="display:flex;gap:12px;font-size:16px;line-height:1.5;color:#0A0F2B"><span style="flex:none;width:6px;height:6px;margin-top:9px;border-radius:50%;background:#0077B6"></span><span>Assess data and systems</span></li>
+          <li style="display:flex;gap:12px;font-size:16px;line-height:1.5;color:#0A0F2B"><span style="flex:none;width:6px;height:6px;margin-top:9px;border-radius:50%;background:#0077B6"></span><span>Establish a performance baseline</span></li>
+          <li style="display:flex;gap:12px;font-size:16px;line-height:1.5;color:#0A0F2B"><span style="flex:none;width:6px;height:6px;margin-top:9px;border-radius:50%;background:#0077B6"></span><span>Recommend a solution with a defined implementation scope</span></li>
+        </ul>
+        <div style="margin-top:28px;padding-top:20px;border-top:1px solid rgba(10,15,43,.18)">
+          <div style="font-size:12px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:#5A6180">You leave with</div>
+          <p style="margin:8px 0 0;font-size:16px;line-height:1.55;font-weight:600;color:#0A0F2B;text-wrap:pretty">A baseline, a recommended solution and a defined scope for building it.</p>
+        </div>
+      </div>
+      <div style="padding-right:40px;display:flex;flex-direction:column">
+        <div style="display:flex;align-items:center">
+          <span style="flex:none;width:11px;height:11px;border-radius:50%;background:#00A8E8"></span>
+          <span style="flex:1;height:1px;background:#00A8E8"></span>
+        </div>
+        <div style="margin-top:24px;font-size:13px;font-weight:600;letter-spacing:.12em;color:#0077B6">02</div>
+        <h3 style="margin:0;font-family:Manrope,sans-serif;font-weight:700;font-size:22px;line-height:1.25;letter-spacing:-.01em;text-wrap:pretty;margin-top:8px;font-size:26px">Build &amp; Launch</h3>
+        <p style="margin:14px 0 0;font-size:17px;line-height:1.65;color:#3C4363;text-wrap:pretty">For putting the recommended solution into use.</p>
+        <ul style="margin:20px 0 0;padding:0;list-style:none;display:grid;gap:10px">
+          <li style="display:flex;gap:12px;font-size:16px;line-height:1.5;color:#0A0F2B"><span style="flex:none;width:6px;height:6px;margin-top:9px;border-radius:50%;background:#0077B6"></span><span>Build the interface, integrations, rules, automations and AI the workflow needs</span></li>
+          <li style="display:flex;gap:12px;font-size:16px;line-height:1.5;color:#0A0F2B"><span style="flex:none;width:6px;height:6px;margin-top:9px;border-radius:50%;background:#0077B6"></span><span>Test with real users and real scenarios</span></li>
+          <li style="display:flex;gap:12px;font-size:16px;line-height:1.5;color:#0A0F2B"><span style="flex:none;width:6px;height:6px;margin-top:9px;border-radius:50%;background:#0077B6"></span><span>Build in approvals and exception handling</span></li>
+          <li style="display:flex;gap:12px;font-size:16px;line-height:1.5;color:#0A0F2B"><span style="flex:none;width:6px;height:6px;margin-top:9px;border-radius:50%;background:#0077B6"></span><span>Support rollout and adoption</span></li>
+        </ul>
+        <div style="margin-top:28px;padding-top:20px;border-top:1px solid rgba(10,15,43,.18)">
+          <div style="font-size:12px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:#5A6180">You leave with</div>
+          <p style="margin:8px 0 0;font-size:16px;line-height:1.55;font-weight:600;color:#0A0F2B;text-wrap:pretty">A working solution, in use by the people who do the work.</p>
+        </div>
+      </div>
+      <div style="padding-right:40px;display:flex;flex-direction:column">
+        <div style="display:flex;align-items:center">
+          <span style="flex:none;width:11px;height:11px;border-radius:50%;background:#00A8E8"></span>
+          <span style="flex:1;height:1px;background:rgba(10,15,43,.18)"></span>
+        </div>
+        <div style="margin-top:24px;font-size:13px;font-weight:600;letter-spacing:.12em;color:#0077B6">03</div>
+        <h3 style="margin:0;font-family:Manrope,sans-serif;font-weight:700;font-size:22px;line-height:1.25;letter-spacing:-.01em;text-wrap:pretty;margin-top:8px;font-size:26px">Operate &amp; Improve</h3>
+        <p style="margin:14px 0 0;font-size:17px;line-height:1.65;color:#3C4363;text-wrap:pretty">For keeping the solution performing once it is live.</p>
+        <ul style="margin:20px 0 0;padding:0;list-style:none;display:grid;gap:10px">
+          <li style="display:flex;gap:12px;font-size:16px;line-height:1.5;color:#0A0F2B"><span style="flex:none;width:6px;height:6px;margin-top:9px;border-radius:50%;background:#0077B6"></span><span>Monitor performance against the baseline</span></li>
+          <li style="display:flex;gap:12px;font-size:16px;line-height:1.5;color:#0A0F2B"><span style="flex:none;width:6px;height:6px;margin-top:9px;border-radius:50%;background:#0077B6"></span><span>Resolve issues and maintain integrations</span></li>
+          <li style="display:flex;gap:12px;font-size:16px;line-height:1.5;color:#0A0F2B"><span style="flex:none;width:6px;height:6px;margin-top:9px;border-radius:50%;background:#0077B6"></span><span>Evaluate AI reliability</span></li>
+          <li style="display:flex;gap:12px;font-size:16px;line-height:1.5;color:#0A0F2B"><span style="flex:none;width:6px;height:6px;margin-top:9px;border-radius:50%;background:#0077B6"></span><span>Track operating costs</span></li>
+          <li style="display:flex;gap:12px;font-size:16px;line-height:1.5;color:#0A0F2B"><span style="flex:none;width:6px;height:6px;margin-top:9px;border-radius:50%;background:#0077B6"></span><span>Make agreed improvements</span></li>
+        </ul>
+        <div style="margin-top:28px;padding-top:20px;border-top:1px solid rgba(10,15,43,.18)">
+          <div style="font-size:12px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:#5A6180">You leave with</div>
+          <p style="margin:8px 0 0;font-size:16px;line-height:1.55;font-weight:600;color:#0A0F2B;text-wrap:pretty">A solution that keeps performing, with a clear view of what it costs and delivers.</p>
+        </div>
       </div>
     </div>
   </div>
 </section>
 
-<section data-screen-label="The kinds of problems we take">
-  <div style="max-width:1280px;margin:0 auto;padding:128px 32px 136px;box-sizing:border-box">
-    <h2 style="margin:0;max-width:820px;font-family:Manrope,sans-serif;font-weight:800;font-size:clamp(34px,3.8vw,50px);line-height:1.08;letter-spacing:-.03em;text-wrap:pretty">If it sounds like one of these, bring it to us.</h2>
-    <p style="margin:28px 0 0;max-width:640px;font-size:18px;line-height:1.6;color:rgba(255,255,255,.8);text-wrap:pretty">The problems below have one thing in common: the people who own them already know what they cost.</p>
-    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(340px,1fr));gap:0 72px;margin-top:72px">
-      <div style="border-top:1px solid rgba(255,255,255,.14);padding:30px 0 32px">
-        <div style="font-family:Manrope,sans-serif;font-weight:700;font-size:21px;line-height:1.3;letter-spacing:-.01em;text-wrap:pretty">Exceptions that pile up because three systems disagree.</div>
-        <div style="margin-top:10px;font-size:15px;line-height:1.5;color:rgba(255,255,255,.55)">ERP, warehouse and order management, carrier data</div>
-      </div>
-      <div style="border-top:1px solid rgba(255,255,255,.14);padding:30px 0 32px">
-        <div style="font-family:Manrope,sans-serif;font-weight:700;font-size:21px;line-height:1.3;letter-spacing:-.01em;text-wrap:pretty">A close that takes the team the whole month.</div>
-        <div style="margin-top:10px;font-size:15px;line-height:1.5;color:rgba(255,255,255,.55)">ERP, consolidation, spreadsheets</div>
-      </div>
-      <div style="border-top:1px solid rgba(255,255,255,.14);padding:30px 0 32px">
-        <div style="font-family:Manrope,sans-serif;font-weight:700;font-size:21px;line-height:1.3;letter-spacing:-.01em;text-wrap:pretty">Renewals nobody sees coming until they are lost.</div>
-        <div style="margin-top:10px;font-size:15px;line-height:1.5;color:rgba(255,255,255,.55)">CRM, support desk, product usage data</div>
-      </div>
-      <div style="border-top:1px solid rgba(255,255,255,.14);padding:30px 0 32px">
-        <div style="font-family:Manrope,sans-serif;font-weight:700;font-size:21px;line-height:1.3;letter-spacing:-.01em;text-wrap:pretty">Contracts and approvals that still route through email.</div>
-        <div style="margin-top:10px;font-size:15px;line-height:1.5;color:rgba(255,255,255,.55)">Contract repository, e-signature, email</div>
-      </div>
-      <div style="border-top:1px solid rgba(255,255,255,.14);padding:30px 0 32px">
-        <div style="font-family:Manrope,sans-serif;font-weight:700;font-size:21px;line-height:1.3;letter-spacing:-.01em;text-wrap:pretty">Pricing and quoting decisions made in spreadsheets.</div>
-        <div style="margin-top:10px;font-size:15px;line-height:1.5;color:rgba(255,255,255,.55)">CRM, pricing tables, quoting tools</div>
-      </div>
-      <div style="border-top:1px solid rgba(255,255,255,.14);padding:30px 0 32px">
-        <div style="font-family:Manrope,sans-serif;font-weight:700;font-size:21px;line-height:1.3;letter-spacing:-.01em;text-wrap:pretty">Operational tracking that has outgrown the spreadsheet it lives in.</div>
-        <div style="margin-top:10px;font-size:15px;line-height:1.5;color:rgba(255,255,255,.55)">Spreadsheets, shared drives, no system of record</div>
-      </div>
-      <div style="border-top:1px solid rgba(255,255,255,.14);border-bottom:1px solid rgba(255,255,255,.14);padding:30px 0 32px">
-        <div style="font-family:Manrope,sans-serif;font-weight:700;font-size:21px;line-height:1.3;letter-spacing:-.01em;text-wrap:pretty">Handoffs between teams where the work falls through the gap.</div>
-        <div style="margin-top:10px;font-size:15px;line-height:1.5;color:rgba(255,255,255,.55)">Ticketing, project tools, email</div>
-      </div>
-      <div style="border-top:1px solid rgba(255,255,255,.14);border-bottom:1px solid rgba(255,255,255,.14);padding:30px 0 32px">
-        <div style="font-family:Manrope,sans-serif;font-weight:700;font-size:21px;line-height:1.3;letter-spacing:-.01em;text-wrap:pretty">Compliance reviews done by hand, every time.</div>
-        <div style="margin-top:10px;font-size:15px;line-height:1.5;color:rgba(255,255,255,.55)">Document stores, policy libraries, audit trails</div>
-      </div>
+<section data-screen-label="How we build" style="position:relative;overflow:hidden">
+  <div style="position:absolute;inset:0;background-image:radial-gradient(rgba(0,168,232,.2) 1px, transparent 1.2px);background-size:28px 28px;-webkit-mask-image:radial-gradient(ellipse 60% 70% at 50% 65%, #000 10%, transparent 100%);mask-image:radial-gradient(ellipse 60% 70% at 50% 65%, #000 10%, transparent 100%);pointer-events:none"></div>
+  <div style="position:relative;max-width:1280px;margin:0 auto;padding:clamp(80px,10vw,124px) clamp(20px,4vw,32px);box-sizing:border-box">
+    <h2 style="margin:0;max-width:860px;font-family:Manrope,sans-serif;font-weight:800;font-size:clamp(32px,3.6vw,48px);line-height:1.08;letter-spacing:-.03em;text-wrap:pretty">Custom doesn't mean built from scratch.</h2>
+    <p style="margin:28px 0 0;max-width:660px;font-size:18px;line-height:1.6;color:rgba(255,255,255,.8);text-wrap:pretty">For every solution we decide three things.</p>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:40px 56px;margin-top:56px">
+      <div style="border-top:1px solid rgba(255,255,255,.14);padding-top:24px"><h3 style="margin:0;font-family:Manrope,sans-serif;font-weight:700;font-size:22px;line-height:1.25;letter-spacing:-.01em;text-wrap:pretty">What to keep.</h3><p style="margin:14px 0 0;font-size:17px;line-height:1.65;color:rgba(255,255,255,.78);text-wrap:pretty;font-size:16px">The systems of record, platforms and data that already work.</p></div>
+      <div style="border-top:1px solid rgba(255,255,255,.14);padding-top:24px"><h3 style="margin:0;font-family:Manrope,sans-serif;font-weight:700;font-size:22px;line-height:1.25;letter-spacing:-.01em;text-wrap:pretty">What to connect, configure or source.</h3><p style="margin:14px 0 0;font-size:17px;line-height:1.65;color:rgba(255,255,255,.78);text-wrap:pretty;font-size:16px">Integrations, features in platforms you already license, and specialist capabilities, including AI services, where they're the better choice.</p></div>
+      <div style="border-top:1px solid rgba(255,255,255,.14);padding-top:24px"><h3 style="margin:0;font-family:Manrope,sans-serif;font-weight:700;font-size:22px;line-height:1.25;letter-spacing:-.01em;text-wrap:pretty">What to build.</h3><p style="margin:14px 0 0;font-size:17px;line-height:1.65;color:rgba(255,255,255,.78);text-wrap:pretty;font-size:16px">What's specific to your operation: the interface, the workflow logic, the rules and the controls.</p></div>
     </div>
-  </div>
-</section>
-
-<section data-screen-label="How the platform comes together" style="position:relative;overflow:hidden;border-top:1px solid rgba(255,255,255,.08)">
-  <div style="position:absolute;inset:0;background-image:radial-gradient(rgba(0,168,232,.2) 1px, transparent 1.2px);background-size:28px 28px;-webkit-mask-image:radial-gradient(ellipse 60% 70% at 50% 55%, #000 10%, transparent 100%);mask-image:radial-gradient(ellipse 60% 70% at 50% 55%, #000 10%, transparent 100%);pointer-events:none"></div>
-  <div style="position:relative;max-width:1280px;margin:0 auto;padding:128px 32px;box-sizing:border-box">
-    <h2 style="margin:0;max-width:820px;font-family:Manrope,sans-serif;font-weight:800;font-size:clamp(34px,3.8vw,50px);line-height:1.08;letter-spacing:-.03em;text-wrap:pretty">The platform is composed, not purchased.</h2>
-    <p style="margin:28px 0 0;max-width:640px;font-size:18px;line-height:1.6;color:rgba(255,255,255,.8);text-wrap:pretty">No single product solves a decades-old enterprise problem. The advantage is knowing what to keep, what to borrow, what to build, and how to make it work as one.</p>
-
-    <div ref="{{ diagRef }}" style="margin-top:80px;display:flex;gap:40px;align-items:stretch">
+    <div ref="{{ diagRef }}" style="margin-top:96px;display:flex;gap:40px;align-items:stretch">
       <sc-if value="{{ wide }}" hint-placeholder-val="{{ true }}">
         <div style="flex:0 0 auto;display:flex;flex-direction:column;align-items:center;width:44px">
           <img src="/assets/mark.png" alt="" style="width:44px;height:auto;display:block;flex:none">
@@ -121,49 +181,165 @@ a{color:#00A8E8;text-decoration:none}a:hover{color:#6BE8C5}
         </div>
       </sc-if>
       <div style="flex:1 1 0;min-width:0">
-        <div style="display:flex;align-items:center;gap:14px;margin-bottom:28px;min-height:44px" data-reveal="{{ r1 }}">
-          <sc-if value="{{ narrow }}" hint-placeholder-val="{{ false }}">
-            <img src="/assets/mark.png" alt="" style="width:36px;height:auto;display:block;flex:none">
-          </sc-if>
-          <div style="font-size:16px;font-weight:500;line-height:1.45;color:#00A8E8;text-wrap:pretty">Brilliant owns the composition and the accountability across every layer.</div>
+        <div data-reveal="{{ r1 }}" style="margin-bottom:28px;min-height:44px;display:flex;align-items:center;font-size:16px;font-weight:500;line-height:1.45;color:#00A8E8;text-wrap:pretty">How the pieces fit together. Brilliant is accountable for the whole.</div>
+        <div data-reveal="{{ r1 }}" style="display:flex;flex-wrap:wrap;gap:8px 40px;padding:28px 0;border-top:1px solid rgba(255,255,255,.14)">
+          <div style="flex:0 0 240px;font-family:Manrope,sans-serif;font-weight:700;font-size:21px;line-height:1.3;letter-spacing:-.01em">User experience</div>
+          <div style="flex:1 1 300px;font-size:17px;line-height:1.6;color:rgba(255,255,255,.78);text-wrap:pretty">The interface the people doing the work use: queues, review screens and guided next steps.</div>
+          <div style="flex:0 0 220px;font-size:13px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;line-height:1.5;color:#6BE8C5;padding-top:4px">Built for your operation</div>
         </div>
-        <div data-reveal="{{ r1 }}" style="display:flex;flex-wrap:wrap;gap:8px 48px;padding:30px 0;border-top:1px solid rgba(255,255,255,.14)">
-          <div style="flex:0 0 240px;font-family:Manrope,sans-serif;font-weight:700;font-size:21px;line-height:1.3;letter-spacing:-.01em">Product experience</div>
-          <div style="flex:1 1 320px;font-size:17px;line-height:1.6;color:rgba(255,255,255,.78);text-wrap:pretty">What Brilliant builds: the interface, the guided path, the next action.</div>
+        <div data-reveal="{{ r2 }}" style="display:flex;flex-wrap:wrap;gap:8px 40px;padding:28px 0;border-top:1px solid rgba(255,255,255,.14)">
+          <div style="flex:0 0 240px;font-family:Manrope,sans-serif;font-weight:700;font-size:21px;line-height:1.3;letter-spacing:-.01em">Workflow</div>
+          <div style="flex:1 1 300px;font-size:17px;line-height:1.6;color:rgba(255,255,255,.78);text-wrap:pretty">The steps, decisions, business rules, approvals and exceptions.</div>
+          <div style="flex:0 0 220px;font-size:13px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;line-height:1.5;color:#6BE8C5;padding-top:4px">Designed and built</div>
         </div>
-        <div data-reveal="{{ r2 }}" style="display:flex;flex-wrap:wrap;gap:8px 48px;padding:30px 0;border-top:1px solid rgba(255,255,255,.14)">
-          <div style="flex:0 0 240px;font-family:Manrope,sans-serif;font-weight:700;font-size:21px;line-height:1.3;letter-spacing:-.01em">System of work</div>
-          <div style="flex:1 1 320px;font-size:17px;line-height:1.6;color:rgba(255,255,255,.78);text-wrap:pretty">What Brilliant designs: the workflow, decisions, rules, controls and exceptions.</div>
+        <div data-reveal="{{ r3 }}" style="display:flex;flex-wrap:wrap;gap:8px 40px;padding:28px 0;border-top:1px solid rgba(255,255,255,.14)">
+          <div style="flex:0 0 240px;font-family:Manrope,sans-serif;font-weight:700;font-size:21px;line-height:1.3;letter-spacing:-.01em">Supporting capabilities</div>
+          <div style="flex:1 1 300px;font-size:17px;line-height:1.6;color:rgba(255,255,255,.78);text-wrap:pretty">Automation, AI, integration and data services, chosen for the problem.</div>
+          <div style="flex:0 0 220px;font-size:13px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;line-height:1.5;color:#6BE8C5;padding-top:4px">Connected, configured or sourced</div>
         </div>
-        <div data-reveal="{{ r3 }}" style="display:flex;flex-wrap:wrap;gap:8px 48px;padding:30px 0;border-top:1px solid rgba(255,255,255,.14)">
-          <div style="flex:0 0 240px;font-family:Manrope,sans-serif;font-weight:700;font-size:21px;line-height:1.3;letter-spacing:-.01em">Capability layer</div>
-          <div style="flex:1 1 320px;font-size:17px;line-height:1.6;color:rgba(255,255,255,.78);text-wrap:pretty">What Brilliant selects and connects: workflow platforms, specialist AI, data and integration.</div>
+        <div data-reveal="{{ r4 }}" style="display:flex;flex-wrap:wrap;gap:8px 40px;padding:28px 0;border-top:1px solid rgba(255,255,255,.14);border-bottom:1px solid rgba(255,255,255,.14)">
+          <div style="flex:0 0 240px;font-family:Manrope,sans-serif;font-weight:700;font-size:21px;line-height:1.3;letter-spacing:-.01em">Existing systems</div>
+          <div style="flex:1 1 300px;font-size:17px;line-height:1.6;color:rgba(255,255,255,.78);text-wrap:pretty">The ERP, CRM, finance, service and data platforms you already run.</div>
+          <div style="flex:0 0 220px;font-size:13px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;line-height:1.5;color:#6BE8C5;padding-top:4px">Kept and connected</div>
         </div>
-        <div data-reveal="{{ r4 }}" style="display:flex;flex-wrap:wrap;gap:8px 48px;padding:30px 0;border-top:1px solid rgba(255,255,255,.14);border-bottom:1px solid rgba(255,255,255,.14)">
-          <div style="flex:0 0 240px;font-family:Manrope,sans-serif;font-weight:700;font-size:21px;line-height:1.3;letter-spacing:-.01em">Systems of record</div>
-          <div style="flex:1 1 320px;font-size:17px;line-height:1.6;color:rgba(255,255,255,.78);text-wrap:pretty">What you already own: ERP, CRM, finance, service and data platforms.</div>
-        </div>
+        <p style="margin:28px 0 0;max-width:680px;font-size:16px;line-height:1.6;color:rgba(255,255,255,.7);text-wrap:pretty">The layers stay the same. What fills them depends on your operation. There is no standard stack and no proprietary Brilliant platform to adopt.</p>
       </div>
     </div>
   </div>
 </section>
 
+<section id="examples" data-screen-label="Examples" style="border-top:1px solid rgba(255,255,255,.08)">
+  <div style="max-width:1280px;margin:0 auto;padding:clamp(80px,10vw,124px) clamp(20px,4vw,32px);box-sizing:border-box">
+    <h2 style="margin:0;max-width:860px;font-family:Manrope,sans-serif;font-weight:800;font-size:clamp(32px,3.6vw,48px);line-height:1.08;letter-spacing:-.03em;text-wrap:pretty">Examples of operating problems we solve.</h2>
+    <p style="margin:28px 0 0;max-width:660px;font-size:18px;line-height:1.6;color:rgba(255,255,255,.8);text-wrap:pretty">These show what we can do. They aren't the boundaries of our work.</p>
+    <div style="margin-top:72px;border-top:1px solid rgba(255,255,255,.14);padding-top:36px">
+      <div style="font-size:13px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:#00A8E8">Featured · Legal</div>
+      <h3 style="margin:0;font-family:Manrope,sans-serif;font-weight:700;font-size:22px;line-height:1.25;letter-spacing:-.01em;text-wrap:pretty;margin-top:12px;font-size:clamp(24px,2.4vw,30px);max-width:820px">Legal intake, contract review and approvals.</h3>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:24px 56px;margin-top:32px">
+        <div><div style="font-size:12px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:#00A8E8">Problem</div><p style="margin:14px 0 0;font-size:17px;line-height:1.65;color:rgba(255,255,255,.78);text-wrap:pretty">Requests arrive by email in every format. Routine agreements wait in the same queue as complex ones, and work goes to outside counsel because there is no clear way to triage it or manage the spend.</p></div>
+        <div><div style="font-size:12px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:#00A8E8">What we build</div><p style="margin:14px 0 0;font-size:17px;line-height:1.65;color:rgba(255,255,255,.78);text-wrap:pretty">Structured requests, review against approved playbooks, AI-assisted review of key terms, and clear escalation to internal or external counsel. Counsel keeps the legal judgment.</p></div>
+        <div><div style="font-size:12px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:#00A8E8">What could improve</div><p style="margin:14px 0 0;font-size:17px;line-height:1.65;color:rgba(255,255,255,.78);text-wrap:pretty">Faster turnaround on routine agreements, more consistent review, and less unnecessary outside counsel spend.</p></div>
+      </div>
+      <div style="margin-top:56px">
+<div>
+  <div style="display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:12px 24px;margin-bottom:16px">
+    <span style="display:inline-flex;align-items:center;gap:8px;padding:6px 12px;border:1px solid rgba(107,232,197,.55);border-radius:999px;font-size:12px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:#6BE8C5">Illustrative workflow · Sample data</span>
+    <span style="font-size:14px;color:rgba(255,255,255,.66)">Select a request to see how it's handled.</span>
+  </div>
+  <div style="background:#fff;color:#0A0F2B;border-radius:10px;overflow:hidden;box-shadow:0 30px 80px rgba(0,0,0,.35)">
+    <div style="display:flex;align-items:center;justify-content:space-between;gap:16px;padding:14px 22px;border-bottom:1px solid #E3E7EE">
+      <div style="display:flex;align-items:center;gap:12px"><img src="/assets/mark.png" alt="" style="width:18px;height:auto;display:block"><span style="font-family:Manrope,sans-serif;font-weight:800;font-size:16px">Legal requests</span></div>
+      <span style="font-size:13px;color:#5A6180">{{ openCount }} open · Sample data</span>
+    </div>
+    <div style="display:flex;flex-wrap:wrap">
+      <div style="flex:1 1 300px;min-width:0;border-right:1px solid #E3E7EE">
+        <div style="padding:12px 22px;font-size:12px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:#5A6180;border-bottom:1px solid #E3E7EE">Queue</div>
+        <sc-for list="{{ requests }}" as="item" hint-placeholder-count="4">
+          <div role="button" tabIndex="0" onClick="{{ item.select }}" style="padding:16px 22px;border-bottom:1px solid #EEF1F5;cursor:pointer;background:{{ item.bg }}">
+            <div style="display:flex;align-items:center;justify-content:space-between;gap:12px">
+              <span style="font-size:12px;color:#5A6180">{{ item.id }} · {{ item.received }}</span>
+              <span style="font-size:12px;font-weight:600;padding:3px 9px;border-radius:999px;white-space:nowrap;background:{{ item.chipBg }};color:{{ item.chipColor }}">{{ item.status }}</span>
+            </div>
+            <div style="margin-top:6px;font-size:15px;font-weight:600;line-height:1.35">{{ item.title }}</div>
+            <div style="margin-top:2px;font-size:14px;color:#5A6180">{{ item.party }}</div>
+          </div>
+        </sc-for>
+      </div>
+      <div style="flex:2 1 420px;min-width:0;padding:24px 28px 28px;box-sizing:border-box">
+        <div style="display:flex;flex-wrap:wrap;align-items:flex-start;justify-content:space-between;gap:12px 24px">
+          <div>
+            <div style="font-size:13px;color:#5A6180">{{ sel.id }} · Received {{ sel.received }}</div>
+            <div style="margin-top:6px;font-family:Manrope,sans-serif;font-weight:800;font-size:22px;line-height:1.25;letter-spacing:-.01em">{{ sel.title }}</div>
+            <div style="margin-top:2px;font-size:15px;color:#3C4363">{{ sel.party }}</div>
+          </div>
+          <span style="font-size:13px;font-weight:600;padding:5px 12px;border-radius:999px;white-space:nowrap;background:{{ sel.chipBg }};color:{{ sel.chipColor }}">{{ sel.status }}</span>
+        </div>
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:16px 24px;margin-top:22px;padding:16px 0;border-top:1px solid #E3E7EE;border-bottom:1px solid #E3E7EE">
+          <div><div style="font-size:12px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:#5A6180">Requested by</div><div style="margin-top:4px;font-size:15px">{{ sel.requester }}</div></div>
+          <div><div style="font-size:12px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:#5A6180">Reviewer</div><div style="margin-top:4px;font-size:15px">{{ sel.reviewer }}</div></div>
+        </div>
+        <div style="margin-top:20px;font-size:12px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:#5A6180">Playbook check</div>
+        <div style="margin-top:8px;display:grid">
+          <sc-for list="{{ sel.checks }}" as="c" hint-placeholder-count="3">
+            <div style="display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 16px;padding:9px 0;border-bottom:1px solid #EEF1F5">
+              <span style="flex:0 0 180px;font-size:14px;font-weight:600">{{ c.label }}</span>
+              <span style="flex:1 1 200px;font-size:14px;color:#3C4363">{{ c.note }}</span>
+              <span style="font-size:12px;font-weight:600;padding:2px 9px;border-radius:999px;background:{{ c.bg }};color:{{ c.color }}">{{ c.result }}</span>
+            </div>
+          </sc-for>
+        </div>
+        <div style="margin-top:20px;display:flex;align-items:center;gap:10px"><span style="font-size:12px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:#5A6180">AI-assisted summary</span><span style="font-size:12px;color:#5A6180">· Checked by the reviewer</span></div>
+        <p style="margin:8px 0 0;font-size:15px;line-height:1.6;color:#3C4363;text-wrap:pretty">{{ sel.summary }}</p>
+        <div style="margin-top:20px;background:#F3F5F8;border-radius:8px;padding:16px 18px">
+          <div style="font-size:12px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:#0077B6">Recommended action</div>
+          <div style="margin-top:6px;font-size:16px;font-weight:600;line-height:1.45">{{ sel.action }}</div>
+          <div style="margin-top:4px;font-size:14px;line-height:1.5;color:#3C4363">{{ sel.why }}</div>
+        </div>
+        <div style="margin-top:20px;display:flex;flex-wrap:wrap;gap:10px">
+          <span style="display:inline-block;background:#0A0F2B;color:#fff;font-size:14px;font-weight:600;padding:10px 18px;border-radius:999px">{{ sel.primary }}</span>
+          <span style="display:inline-block;border:1px solid #C9CFDA;color:#0A0F2B;font-size:14px;font-weight:600;padding:9px 18px;border-radius:999px">Reassign</span>
+          <span style="display:inline-block;border:1px solid #C9CFDA;color:#0A0F2B;font-size:14px;font-weight:600;padding:9px 18px;border-radius:999px">Ask requester</span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <p style="margin:20px 0 0;max-width:760px;font-size:15px;line-height:1.6;color:rgba(255,255,255,.7);text-wrap:pretty">Requests arrive through a structured form. Rules check each one against approved playbooks, AI summarizes the key terms, and clear criteria decide what goes to internal or outside counsel. Counsel makes the legal call. Names, terms and people shown are fictional.</p>
+</div></div>
+    </div>
+    <div style="margin-top:96px;display:grid">
+      <div style="border-top:1px solid rgba(255,255,255,.14);padding:36px 0;display:flex;flex-wrap:wrap;gap:16px 48px">
+        <div style="flex:1 1 220px;max-width:320px"><h3 style="margin:0;font-family:Manrope,sans-serif;font-weight:700;font-size:22px;line-height:1.25;letter-spacing:-.01em;text-wrap:pretty">Finance close and reconciliation exceptions</h3></div>
+        <div style="flex:3 1 560px;min-width:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px 40px">
+        <div><div style="font-size:12px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:#00A8E8">Problem</div><p style="margin:10px 0 0;font-size:15px;line-height:1.6;color:rgba(255,255,255,.74);text-wrap:pretty">Reconciliation exceptions surface late and are worked in spreadsheets, so the close runs long.</p></div>
+        <div><div style="font-size:12px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:#00A8E8">What we build</div><p style="margin:10px 0 0;font-size:15px;line-height:1.6;color:rgba(255,255,255,.74);text-wrap:pretty">Matching rules for routine items, an exceptions queue with supporting detail, AI-assisted variance explanations, and review and sign-off built in.</p></div>
+        <div><div style="font-size:12px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:#00A8E8">What could improve</div><p style="margin:10px 0 0;font-size:15px;line-height:1.6;color:rgba(255,255,255,.74);text-wrap:pretty">Earlier visibility of exceptions, fewer manual reconciliations and a more predictable close.</p></div>
+        </div>
+      </div>
+      <div style="border-top:1px solid rgba(255,255,255,.14);padding:36px 0;display:flex;flex-wrap:wrap;gap:16px 48px">
+        <div style="flex:1 1 220px;max-width:320px"><h3 style="margin:0;font-family:Manrope,sans-serif;font-weight:700;font-size:22px;line-height:1.25;letter-spacing:-.01em;text-wrap:pretty">Supply-chain exceptions across disconnected systems</h3></div>
+        <div style="flex:3 1 560px;min-width:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px 40px">
+        <div><div style="font-size:12px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:#00A8E8">Problem</div><p style="margin:10px 0 0;font-size:15px;line-height:1.6;color:rgba(255,255,255,.74);text-wrap:pretty">Orders, inventory and carrier data sit in separate systems that disagree. Planners spend the day finding problems.</p></div>
+        <div><div style="font-size:12px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:#00A8E8">What we build</div><p style="margin:10px 0 0;font-size:15px;line-height:1.6;color:rgba(255,255,255,.74);text-wrap:pretty">One exceptions queue fed by each system, rules for routine mismatches and recommended actions for planners.</p></div>
+        <div><div style="font-size:12px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:#00A8E8">What could improve</div><p style="margin:10px 0 0;font-size:15px;line-height:1.6;color:rgba(255,255,255,.74);text-wrap:pretty">Problems found sooner, fewer missed shipments and more time spent resolving them.</p></div>
+        </div>
+      </div>
+      <div style="border-top:1px solid rgba(255,255,255,.14);padding:36px 0;display:flex;flex-wrap:wrap;gap:16px 48px">
+        <div style="flex:1 1 220px;max-width:320px"><h3 style="margin:0;font-family:Manrope,sans-serif;font-weight:700;font-size:22px;line-height:1.25;letter-spacing:-.01em;text-wrap:pretty">Renewals and cross-team handoffs</h3></div>
+        <div style="flex:3 1 560px;min-width:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px 40px">
+        <div><div style="font-size:12px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:#00A8E8">Problem</div><p style="margin:10px 0 0;font-size:15px;line-height:1.6;color:rgba(255,255,255,.74);text-wrap:pretty">Account context is scattered across CRM, support and email, so renewals and handoffs between teams slip.</p></div>
+        <div><div style="font-size:12px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:#00A8E8">What we build</div><p style="margin:10px 0 0;font-size:15px;line-height:1.6;color:rgba(255,255,255,.74);text-wrap:pretty">Shared ownership, status and due dates across teams, with AI-assisted account summaries and early warning on risk.</p></div>
+        <div><div style="font-size:12px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:#00A8E8">What could improve</div><p style="margin:10px 0 0;font-size:15px;line-height:1.6;color:rgba(255,255,255,.74);text-wrap:pretty">Fewer surprises at renewal and fewer handoffs lost between teams.</p></div>
+        </div>
+      </div>
+      <div style="border-top:1px solid rgba(255,255,255,.14);border-bottom:1px solid rgba(255,255,255,.14);padding:36px 0;display:flex;flex-wrap:wrap;gap:16px 48px">
+        <div style="flex:1 1 220px;max-width:320px"><h3 style="margin:0;font-family:Manrope,sans-serif;font-weight:700;font-size:22px;line-height:1.25;letter-spacing:-.01em;text-wrap:pretty">Processes that have outgrown spreadsheets</h3></div>
+        <div style="flex:3 1 560px;min-width:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px 40px">
+        <div><div style="font-size:12px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:#00A8E8">Problem</div><p style="margin:10px 0 0;font-size:15px;line-height:1.6;color:rgba(255,255,255,.74);text-wrap:pretty">A critical process runs on spreadsheets and shared drives, with no clear owner, history or controls.</p></div>
+        <div><div style="font-size:12px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:#00A8E8">What we build</div><p style="margin:10px 0 0;font-size:15px;line-height:1.6;color:rgba(255,255,255,.74);text-wrap:pretty">A system of record with defined ownership, approvals, audit history and an interface built for the team.</p></div>
+        <div><div style="font-size:12px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:#00A8E8">What could improve</div><p style="margin:10px 0 0;font-size:15px;line-height:1.6;color:rgba(255,255,255,.74);text-wrap:pretty">Less rework, clearer accountability and a process that can scale.</p></div>
+        </div>
+      </div>
+    </div>
+    <p style="margin:28px 0 0;font-size:14px;color:rgba(255,255,255,.62)">Illustrative examples. Outcomes depend on each operation and are measured against an agreed baseline.</p>
+  </div>
+</section>
+
 <section id="close" data-screen-label="Close" style="border-top:1px solid rgba(255,255,255,.08)">
-  <div style="max-width:1280px;margin:0 auto;padding:128px 32px;box-sizing:border-box">
-    <h2 style="margin:0;max-width:860px;font-family:Manrope,sans-serif;font-weight:800;font-size:clamp(36px,4.4vw,58px);line-height:1.06;letter-spacing:-.03em;text-wrap:pretty">One outcome becomes a platform.</h2>
-    <p style="margin:28px 0 0;max-width:640px;font-size:18px;line-height:1.6;color:rgba(255,255,255,.8);text-wrap:pretty">Once the first workflow is live, the integrations, controls and product pieces carry straight into the next problem. The second workflow is faster than the first, and the third faster again. That is how one solved problem becomes the operating platform for the whole function.</p>
+  <div style="max-width:1280px;margin:0 auto;padding:clamp(80px,10vw,124px) clamp(20px,4vw,32px);box-sizing:border-box">
+    <h2 style="margin:0;max-width:860px;font-family:Manrope,sans-serif;font-weight:800;font-size:clamp(32px,3.6vw,48px);line-height:1.08;letter-spacing:-.03em;text-wrap:pretty;font-size:clamp(36px,4.4vw,58px);line-height:1.06">Have a problem like these?</h2>
+    <p style="margin:28px 0 0;max-width:660px;font-size:18px;line-height:1.6;color:rgba(255,255,255,.8);text-wrap:pretty">You don't need to know the exact cost, the owner or the technical answer yet. The first conversation is about understanding the problem: where work is slow or costly, who it affects and which systems are involved. From there, we'll recommend the right next step.</p>
     <div style="margin-top:40px;display:flex;flex-wrap:wrap;align-items:center;gap:20px 36px">
-      <a href="mailto:hello@brilliant.ai" style="display:inline-block;background:#00A8E8;color:#0A0F2B;font-weight:600;font-size:16px;padding:15px 28px;border-radius:999px" style-hover="background:#6BE8C5;color:#0A0F2B">Bring us one problem</a>
-      <a href="/how-we-work" style="font-size:17px;font-weight:500;color:#00A8E8" style-hover="color:#6BE8C5">See how we work →</a>
+      <a href="mailto:hello@brilliant.ai?subject=One%20problem" style="display:inline-block;background:#00A8E8;color:#0A0F2B;font-weight:600;font-size:16px;padding:15px 28px;border-radius:999px" style-hover="background:#6BE8C5;color:#0A0F2B">Bring us one problem</a>
+      <a href="mailto:hello@brilliant.ai" style="font-size:17px;font-weight:500;color:#00A8E8" style-hover="color:#6BE8C5">hello@brilliant.ai</a>
     </div>
   </div>
 </section>
 
 <footer style="border-top:1px solid rgba(255,255,255,.1)">
-  <div style="max-width:1280px;margin:0 auto;padding:48px 32px 56px;box-sizing:border-box;display:flex;flex-wrap:wrap;gap:32px 64px;align-items:flex-start;justify-content:space-between">
+  <div style="max-width:1280px;margin:0 auto;padding:48px clamp(20px,4vw,32px) 56px;box-sizing:border-box;display:flex;flex-wrap:wrap;gap:32px 64px;align-items:flex-start;justify-content:space-between">
     <div style="flex:1 1 320px;min-width:0;max-width:420px">
       <img src="/assets/lockup-white.png" alt="brilliant.ai" style="height:26px;display:block">
-      <p style="margin:18px 0 0;font-size:15px;line-height:1.55;color:rgba(255,255,255,.62);text-wrap:pretty">Rebuilding the workflows behind the enterprise's biggest problems.</p>
+      <p style="margin:18px 0 0;font-size:15px;line-height:1.55;color:rgba(255,255,255,.66);text-wrap:pretty">Platform first. AI forward. Rebuilding the workflows behind known operating problems.</p>
     </div>
     <div style="display:flex;flex-wrap:wrap;gap:16px 32px;font-size:15px;align-items:center">
       <a href="/" style="color:rgba(255,255,255,.72)" style-hover="color:#fff">Home</a>
@@ -178,37 +354,88 @@ a{color:#00A8E8;text-decoration:none}a:hover{color:#6BE8C5}
   </div>
 </footer>
 </x-dc>
-<script type="text/x-dc" data-dc-script data-props="{&quot;revealOnScroll&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Platform diagram&quot;}}">
+<script type="text/x-dc" data-dc-script data-props="{&quot;revealOnScroll&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Diagram&quot;}}">
 class Component extends DCLogic {
-  state = { wide: true, reveal: 0 };
-  diagRef = React.createRef();
+  state = { wide: typeof window !== 'undefined' ? window.matchMedia('(min-width: 1040px)').matches : true, menu: false, reveal: 0 };
   componentDidMount() {
     this.mq = window.matchMedia('(min-width: 1040px)');
-    this.onResize = () => { const w = this.mq.matches; if (w !== this.state.wide) this.setState({ wide: w }); };
-    this.mq.addEventListener('change', this.onResize);
-    window.addEventListener('resize', this.onResize);
-    this.onResize();
+    this.onMq = () => { const w = this.mq.matches; if (w !== this.state.wide) this.setState({ wide: w, menu: false }); if (this.onScroll) this.onScroll(); };
+    this.mq.addEventListener('change', this.onMq);
+    window.addEventListener('resize', this.onMq);
+    this.onMq();
     const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     const run = () => {
       if (this.started) return; this.started = true;
       if (reduce) { this.setState({ reveal: 4 }); return; }
       [1, 2, 3, 4].forEach((n, i) => setTimeout(() => this.setState({ reveal: n }), 150 + i * 320));
     };
-    if ('IntersectionObserver' in window && this.diagRef.current) {
-      this.io = new IntersectionObserver(es => { if (es.some(e => e.isIntersecting)) { run(); this.io.disconnect(); } }, { threshold: 0.2 });
-      this.io.observe(this.diagRef.current);
-    } else run();
+    const attach = (tries) => {
+      const el = this.diagRef.current;
+      if (!el) { if (tries > 0) return setTimeout(() => attach(tries - 1), 100); return run(); }
+      if (!('IntersectionObserver' in window)) return run();
+      this.io = new IntersectionObserver(es => { if (es.some(e => e.isIntersecting)) { run(); this.io.disconnect(); } }, { threshold: 0.05 });
+      this.io.observe(el);
+      const r = el.getBoundingClientRect();
+      if (r.top < window.innerHeight && r.bottom > 0) run();
+    };
+    requestAnimationFrame(() => attach(20));
+    this.onScrollReveal = () => { const el = this.diagRef.current; if (!el) return; const r = el.getBoundingClientRect(); if (r.top < window.innerHeight * 0.9 && r.bottom > 0) run(); };
+    window.addEventListener('scroll', this.onScrollReveal, { passive: true });
   }
   componentWillUnmount() {
-    this.mq && this.mq.removeEventListener('change', this.onResize);
-    window.removeEventListener('resize', this.onResize);
+    this.mq && this.mq.removeEventListener('change', this.onMq);
+    window.removeEventListener('resize', this.onMq);
     this.io && this.io.disconnect();
+    window.removeEventListener('scroll', this.onScrollReveal);
   }
+  requestVals() {
+    const tone = {
+      ready: ['rgba(107,232,197,.28)', '#0B5E4B'],
+      review: ['rgba(0,168,232,.14)', '#005F92'],
+      escalated: ['#0A0F2B', '#FFFFFF'],
+      done: ['#E6E9EF', '#3C4363']
+    };
+    const pass = ['rgba(107,232,197,.28)', '#0B5E4B'], flag = ['rgba(0,168,232,.14)', '#005F92'];
+    const chk = (label, note, ok) => ({ label, note, result: ok ? 'Within playbook' : 'Flagged', bg: (ok ? pass : flag)[0], color: (ok ? pass : flag)[1] });
+    const data = [
+      { id: 'LR-2041', received: '9:12 today', title: 'Mutual NDA', party: 'Larkspur Media', status: 'Ready to approve', t: 'ready',
+        requester: 'M. Chen, Partnerships', reviewer: 'Legal operations',
+        checks: [chk('Template', 'Company standard mutual NDA', true), chk('Term', 'Two years', true), chk('Governing law', 'On the approved list', true)],
+        summary: 'Standard mutual NDA on the company template. No edits to confidentiality, term or remedies.',
+        action: 'Approve using the standard template.', why: 'All terms match the approved playbook, so no counsel review is needed.', primary: 'Approve' },
+      { id: 'LR-2038', received: '8:40 today', title: 'Master services agreement', party: 'Kestrel Analytics', status: 'Counsel review', t: 'review',
+        requester: 'R. Alvarez, Procurement', reviewer: 'J. Okafor, Commercial counsel',
+        checks: [chk('Limitation of liability', 'Cap set at 3 months of fees', false), chk('Payment terms', 'Net 60', true), chk('Data protection', 'Standard DPA attached', true)],
+        summary: 'Vendor paper. The liability cap is set at fees paid in the prior three months, below the playbook minimum of twelve. Other key terms fall within the playbook.',
+        action: 'Route to internal counsel with the liability clause highlighted.', why: 'One clause falls outside the playbook. Counsel decides whether to accept, negotiate or escalate.', primary: 'Route to counsel' },
+      { id: 'LR-2033', received: 'Yesterday', title: 'Data processing addendum', party: 'Ostrander Freight', status: 'Escalated', t: 'escalated',
+        requester: 'S. Patel, Operations', reviewer: 'Outside counsel, privacy',
+        checks: [chk('Data transfers', 'Region outside approved mechanisms', false), chk('Sub-processors', 'List provided', true), chk('Breach notice', '72 hours', true)],
+        summary: 'The counterparty proposes transferring personal data to a region not covered by the approved transfer mechanisms.',
+        action: 'Escalate to outside privacy counsel.', why: 'Matches the escalation criteria for specialist advice. Internal counsel approved the referral.', primary: 'Send to outside counsel' },
+      { id: 'LR-2029', received: 'Monday', title: 'Agency agreement renewal', party: 'Fenwick Studio', status: 'Approved', t: 'done',
+        requester: 'A. Brooks, Marketing', reviewer: 'Legal operations',
+        checks: [chk('Changes from prior term', 'Fee schedule only', true), chk('Term', '12 months', true), chk('IP ownership', 'Unchanged', true)],
+        summary: 'Renewal of an existing agreement. Only the fee schedule has changed, within the approved budget.',
+        action: 'Approved. Sent for signature.', why: 'Renewal with no material changes.', primary: 'View signature status' }
+    ];
+    const s = this.state.sel ?? 1;
+    const requests = data.map((d, i) => Object.assign({}, d, {
+      chipBg: tone[d.t][0], chipColor: tone[d.t][1],
+      bg: i === s ? '#EEF6FB' : '#FFFFFF',
+      select: () => this.setState({ sel: i })
+    }));
+    return { requests, sel: requests[s], openCount: String(data.filter(d => d.t !== 'done').length) };
+  }
+  diagRef = React.createRef();
   renderVals() {
-    const r = this.state.reveal, on = this.props.revealOnScroll ?? true;
-    const v = n => (!on || r >= n) ? '1' : '0';
-    return { wide: this.state.wide, narrow: !this.state.wide, diagRef: this.diagRef,
-      r1: v(1), r2: v(2), r3: v(3), r4: v(4), lineGrown: v(1) };
+    const wide = this.state.wide, menuOpen = this.state.menu && !wide;
+    return Object.assign({
+      wide, narrow: !wide, menuOpen,
+      menuLabel: menuOpen ? 'Close' : 'Menu',
+      toggleMenu: () => this.setState(s => ({ menu: !s.menu })),
+      closeMenu: () => this.setState({ menu: false })
+    }, Object.assign(this.requestVals(), (() => { const r = this.state.reveal, on = this.props.revealOnScroll ?? true; const v = n => (!on || r >= n) ? '1' : '0'; return { diagRef: this.diagRef, r1: v(1), r2: v(2), r3: v(3), r4: v(4), lineGrown: v(1) }; })()));
   }
 }
 </script>

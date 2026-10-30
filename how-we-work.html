@@ -22,111 +22,139 @@ a{color:#00A8E8;text-decoration:none}a:hover{color:#6BE8C5}
 </style>
 </helmet>
 
-<header style="position:sticky;top:0;z-index:20;background:rgba(10,15,43,.86);backdrop-filter:blur(14px);border-bottom:1px solid rgba(255,255,255,.08)">
-  <nav style="max-width:1280px;margin:0 auto;padding:0 32px;height:72px;display:flex;align-items:center;justify-content:space-between;gap:32px">
+<header style="position:sticky;top:0;z-index:20;background:rgba(10,15,43,.92);backdrop-filter:blur(14px);border-bottom:1px solid rgba(255,255,255,.08)">
+  <nav style="max-width:1280px;margin:0 auto;padding:0 clamp(20px,4vw,32px);height:72px;display:flex;align-items:center;justify-content:space-between;gap:32px">
     <a href="/" style="display:flex;align-items:center"><img src="/assets/lockup-white.png" alt="brilliant.ai" style="height:30px;display:block"></a>
     <sc-if value="{{ wide }}" hint-placeholder-val="{{ true }}">
-      <div style="display:flex;align-items:center;gap:36px;font-size:15px;font-weight:500;white-space:nowrap">
-        <a href="/" style="color:rgba(255,255,255,.72)" style-hover="color:#fff">Home</a>
-        <a href="/what-we-do" style="color:rgba(255,255,255,.72)" style-hover="color:#fff">What We Do</a>
-        <a href="/how-we-work" style="color:#fff">How We Work</a>
-        <a href="/experience" style="color:rgba(255,255,255,.72)" style-hover="color:#fff">Experience</a>
+      <div style="display:flex;align-items:center;gap:48px">
+        <div style="display:flex;align-items:center;gap:36px;font-size:15px;font-weight:500;white-space:nowrap">
+          <a href="/" style="color:rgba(255,255,255,.72)" style-hover="color:#fff">Home</a>
+          <a href="/what-we-do" style="color:rgba(255,255,255,.72)" style-hover="color:#fff">What We Do</a>
+          <a href="/how-we-work" style="color:#fff">How We Work</a>
+          <a href="/experience" style="color:rgba(255,255,255,.72)" style-hover="color:#fff">Experience</a>
+        </div>
+        <a href="#close" style="color:#fff;font-size:15px;font-weight:500;padding:11px 22px;border:1px solid rgba(255,255,255,.4);border-radius:999px;white-space:nowrap" style-hover="border-color:#6BE8C5;color:#6BE8C5">Bring us one problem</a>
       </div>
     </sc-if>
-    <a href="#close" style="color:#fff;font-size:15px;font-weight:500;padding:11px 22px;border:1px solid rgba(255,255,255,.4);border-radius:999px;white-space:nowrap" style-hover="border-color:#6BE8C5;color:#6BE8C5">Start a conversation</a>
+    <sc-if value="{{ narrow }}" hint-placeholder-val="{{ false }}">
+      <button onClick="{{ toggleMenu }}" aria-expanded="{{ menuOpen }}" style="height:44px;padding:0 18px;border:1px solid rgba(255,255,255,.4);border-radius:999px;background:transparent;color:#fff;font:500 15px Inter,system-ui,sans-serif;cursor:pointer">{{ menuLabel }}</button>
+    </sc-if>
   </nav>
+  <sc-if value="{{ menuOpen }}" hint-placeholder-val="{{ false }}">
+    <div style="border-top:1px solid rgba(255,255,255,.08);padding:8px clamp(20px,4vw,32px) 28px;display:grid">
+      <a href="/" onClick="{{ closeMenu }}" style="display:block;padding:14px 0;border-bottom:1px solid rgba(255,255,255,.08);font-family:Manrope,sans-serif;font-weight:700;font-size:20px;color:rgba(255,255,255,.78)">Home</a>
+      <a href="/what-we-do" onClick="{{ closeMenu }}" style="display:block;padding:14px 0;border-bottom:1px solid rgba(255,255,255,.08);font-family:Manrope,sans-serif;font-weight:700;font-size:20px;color:rgba(255,255,255,.78)">What We Do</a>
+      <a href="/how-we-work" onClick="{{ closeMenu }}" style="display:block;padding:14px 0;border-bottom:1px solid rgba(255,255,255,.08);font-family:Manrope,sans-serif;font-weight:700;font-size:20px;color:#fff">How We Work</a>
+      <a href="/experience" onClick="{{ closeMenu }}" style="display:block;padding:14px 0;border-bottom:1px solid rgba(255,255,255,.08);font-family:Manrope,sans-serif;font-weight:700;font-size:20px;color:rgba(255,255,255,.78)">Experience</a>
+      <a href="#close" onClick="{{ closeMenu }}" style="display:inline-block;background:#00A8E8;color:#0A0F2B;font-weight:600;font-size:16px;padding:15px 28px;border-radius:999px;margin-top:24px;text-align:center" style-hover="background:#6BE8C5;color:#0A0F2B">Bring us one problem</a>
+    </div>
+  </sc-if>
 </header>
 
 <section data-screen-label="Opening" style="position:relative;overflow:hidden">
   <img src="/assets/mark-outline.png" alt="" style="position:absolute;right:-40px;top:50%;transform:translateY(-50%);width:min(560px,60vw);height:auto;opacity:.08;pointer-events:none">
-  <div style="position:relative;max-width:1280px;margin:0 auto;padding:128px 32px 136px;box-sizing:border-box">
-    <h1 style="margin:0;max-width:860px;font-family:Manrope,sans-serif;font-weight:800;font-size:clamp(42px,5.2vw,68px);line-height:1.04;letter-spacing:-.03em;text-wrap:pretty">We work out what the work needs. Then we <span style="color:#6BE8C5">build</span> it.</h1>
-    <p style="margin:40px 0 0;max-width:640px;font-size:18px;line-height:1.6;color:rgba(255,255,255,.8);text-wrap:pretty">Brilliant is an honest broker for improving business workflows. We architect and implement the right combination of your existing technology, integrations, automation and AI, and recommend replacing a system only when that is the best path for the business. You do not need a scoped workflow or a requirements document. We help define the problem and prepare the foundation with you.</p>
+  <div style="position:relative;max-width:1280px;margin:0 auto;padding:clamp(80px,10vw,124px) clamp(20px,4vw,32px);box-sizing:border-box">
+    <div style="font-size:13px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:#00A8E8">How we work</div>
+    <h1 style="margin:0;font-family:Manrope,sans-serif;font-weight:800;font-size:clamp(40px,5vw,64px);line-height:1.05;letter-spacing:-.03em;text-wrap:pretty;margin-top:24px;max-width:900px">One accountable lead. The <span style="color:#6BE8C5">team</span> the problem requires.</h1>
+    <p style="margin:28px 0 0;max-width:660px;font-size:18px;line-height:1.6;color:rgba(255,255,255,.8);text-wrap:pretty;margin-top:36px">You don't need a scoped project or a requirements document to begin. An Outcome FDE leads the work with the builders and specialists your problem needs, alongside your operating team and IT.</p>
   </div>
 </section>
 
-<section data-screen-label="The sequence" style="border-top:1px solid rgba(255,255,255,.08)">
-  <div style="max-width:1280px;margin:0 auto;padding:120px 32px 128px;box-sizing:border-box">
-    <h2 style="margin:0;max-width:820px;font-family:Manrope,sans-serif;font-weight:800;font-size:clamp(34px,3.8vw,50px);line-height:1.08;letter-spacing:-.03em;text-wrap:pretty">Four stages, accountable and measured from the first map to live operation.</h2>
+<section data-screen-label="Who does the work" style="background:#F3F5F8;color:#0A0F2B">
+  <div style="max-width:1280px;margin:0 auto;padding:clamp(80px,10vw,124px) clamp(20px,4vw,32px);box-sizing:border-box">
+    <h2 style="margin:0;max-width:860px;font-family:Manrope,sans-serif;font-weight:800;font-size:clamp(32px,3.6vw,48px);line-height:1.08;letter-spacing:-.03em;text-wrap:pretty">Who does the work.</h2>
+    <div style="margin-top:64px;border-top:1px solid rgba(10,15,43,.18);padding-top:36px;display:flex;flex-wrap:wrap;gap:20px 72px;align-items:flex-start">
+      <h3 style="margin:0;flex:0 0 300px;font-family:Manrope,sans-serif;font-weight:800;font-size:clamp(28px,2.8vw,36px);line-height:1.12;letter-spacing:-.025em">The Outcome FDE.</h3>
+      <p style="margin:0;flex:1 1 380px;max-width:640px;font-size:18px;line-height:1.65;color:#3C4363;text-wrap:pretty">A forward-deployed engineer accountable for the business outcome across the complete workflow. They learn how the work happens, guide the design and architecture, coordinate the build, and stay accountable for adoption and performance after launch. No one person is expected to be the expert in everything, so the right specialists work alongside them.</p>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:48px 56px;margin-top:64px">
+      <div style="border-top:1px solid rgba(10,15,43,.18);padding-top:28px"><h3 style="margin:0;font-family:Manrope,sans-serif;font-weight:700;font-size:22px;line-height:1.25;letter-spacing:-.01em;text-wrap:pretty">Builders and specialists.</h3><p style="margin:14px 0 0;font-size:17px;line-height:1.65;color:#3C4363;text-wrap:pretty">Engineers, workflow specialists and AI specialists, with experts in the platforms you already run, such as SAP, OneStream, Salesforce or Airtable.</p></div>
+      <div style="border-top:1px solid rgba(10,15,43,.18);padding-top:28px"><h3 style="margin:0;font-family:Manrope,sans-serif;font-weight:700;font-size:22px;line-height:1.25;letter-spacing:-.01em;text-wrap:pretty">Your operating team.</h3><p style="margin:14px 0 0;font-size:17px;line-height:1.65;color:#3C4363;text-wrap:pretty">The process owner who brought the problem and the people who do the work. They are part of the build, not just interviewed for it.</p></div>
+      <div style="border-top:1px solid rgba(10,15,43,.18);padding-top:28px"><h3 style="margin:0;font-family:Manrope,sans-serif;font-weight:700;font-size:22px;line-height:1.25;letter-spacing:-.01em;text-wrap:pretty">Your IT.</h3><p style="margin:14px 0 0;font-size:17px;line-height:1.65;color:#3C4363;text-wrap:pretty">Involved from the start on architecture, security, access and systems of record, so the solution fits how you govern technology.</p></div>
+    </div>
+  </div>
+</section>
 
-    <sc-if value="{{ wide }}" hint-placeholder-val="{{ true }}">
+<section data-screen-label="The progression">
+  <div style="max-width:1280px;margin:0 auto;padding:clamp(80px,10vw,124px) clamp(20px,4vw,32px);box-sizing:border-box">
+    <h2 style="margin:0;max-width:860px;font-family:Manrope,sans-serif;font-weight:800;font-size:clamp(32px,3.6vw,48px);line-height:1.08;letter-spacing:-.03em;text-wrap:pretty">Start with one problem. Build from there.</h2>
+    <sc-if value="{{ stickyOn }}" hint-placeholder-val="{{ true }}">
       <div style="display:grid;grid-template-columns:minmax(300px,420px) minmax(0,640px);gap:0 96px;margin-top:88px;align-items:start">
         <div style="position:sticky;top:140px">
           <div style="position:relative;padding-left:36px">
             <div style="position:absolute;left:4px;top:10px;bottom:10px;width:1px;background:rgba(255,255,255,.15)"></div>
             <div style="position:absolute;left:4px;top:10px;bottom:10px;width:1px;background:#00A8E8;transform-origin:top;transform:scaleY({{ progress }})"></div>
-            <div style="display:grid;gap:44px">
+            <div style="display:grid;gap:40px">
               <div style="position:relative" data-stage="{{ s1 }}">
                 <span style="position:absolute;left:-36px;top:6px;width:9px;height:9px;border-radius:50%;border:1px solid;box-sizing:border-box" data-dot="{{ s1 }}"></span>
-                <div style="font-size:13px;font-weight:500;letter-spacing:.1em;color:#00A8E8">01</div>
-                <div style="margin-top:6px;font-family:Manrope,sans-serif;font-weight:700;font-size:24px;line-height:1.2;letter-spacing:-.015em">Understand the work and prepare the foundation.</div>
+                <div style="font-size:13px;font-weight:600;letter-spacing:.1em;color:#00A8E8">01 · Understand &amp; Scope</div>
+                <div style="margin-top:6px;font-family:Manrope,sans-serif;font-weight:700;font-size:23px;line-height:1.25;letter-spacing:-.015em">Start with one meaningful operating problem.</div>
               </div>
               <div style="position:relative" data-stage="{{ s2 }}">
                 <span style="position:absolute;left:-36px;top:6px;width:9px;height:9px;border-radius:50%;border:1px solid;box-sizing:border-box" data-dot="{{ s2 }}"></span>
-                <div style="font-size:13px;font-weight:500;letter-spacing:.1em;color:#00A8E8">02</div>
-                <div style="margin-top:6px;font-family:Manrope,sans-serif;font-weight:700;font-size:24px;line-height:1.2;letter-spacing:-.015em">Architect the right solution.</div>
+                <div style="font-size:13px;font-weight:600;letter-spacing:.1em;color:#00A8E8">02 · Build &amp; Launch</div>
+                <div style="margin-top:6px;font-family:Manrope,sans-serif;font-weight:700;font-size:23px;line-height:1.25;letter-spacing:-.015em">Build the solution and put it into use.</div>
               </div>
               <div style="position:relative" data-stage="{{ s3 }}">
                 <span style="position:absolute;left:-36px;top:6px;width:9px;height:9px;border-radius:50%;border:1px solid;box-sizing:border-box" data-dot="{{ s3 }}"></span>
-                <div style="font-size:13px;font-weight:500;letter-spacing:.1em;color:#00A8E8">03</div>
-                <div style="margin-top:6px;font-family:Manrope,sans-serif;font-weight:700;font-size:24px;line-height:1.2;letter-spacing:-.015em">Build with the right experts.</div>
+                <div style="font-size:13px;font-weight:600;letter-spacing:.1em;color:#00A8E8">03 · Operate &amp; Improve</div>
+                <div style="margin-top:6px;font-family:Manrope,sans-serif;font-weight:700;font-size:23px;line-height:1.25;letter-spacing:-.015em">Measure and improve performance.</div>
               </div>
               <div style="position:relative" data-stage="{{ s4 }}">
                 <span style="position:absolute;left:-36px;top:6px;width:9px;height:9px;border-radius:50%;border:1px solid;box-sizing:border-box" data-dot="{{ s4 }}"></span>
-                <div style="font-size:13px;font-weight:500;letter-spacing:.1em;color:#00A8E8">04</div>
-                <div style="margin-top:6px;font-family:Manrope,sans-serif;font-weight:700;font-size:24px;line-height:1.2;letter-spacing:-.015em">Prove it, then build on it.</div>
+                <div style="font-size:13px;font-weight:600;letter-spacing:.1em;color:#00A8E8">04 · The next workflow</div>
+                <div style="margin-top:6px;font-family:Manrope,sans-serif;font-weight:700;font-size:23px;line-height:1.25;letter-spacing:-.015em">Extend to adjacent workflows.</div>
               </div>
             </div>
           </div>
         </div>
         <div ref="{{ trackRef }}" style="display:grid">
-          <div ref="{{ p1 }}" style="min-height:52vh;padding-bottom:64px;font-size:18px;line-height:1.65;color:rgba(255,255,255,.82);text-wrap:pretty">
-            <div style="font-family:Manrope,sans-serif;font-weight:700;font-size:24px;line-height:1.2;letter-spacing:-.015em;color:#fff;margin-bottom:18px">Understand the work and prepare the foundation.</div>
-            <p style="margin:0 0 0">We work alongside your team to map the workflow as it actually runs: the systems, handoffs, decisions and exceptions. Together we agree on the scope and how success will be measured.</p><p style="margin:16px 0 0">Then we address what the solution depends on: data quality, process rules and ownership. Reliable automation and agents need trustworthy information and a correctly designed workflow. This preparation is part of our work, scoped to the solution.</p>
+          <div ref="{{ p1 }}" style="min-height:48vh;padding-bottom:64px">
+            <div style="font-family:Manrope,sans-serif;font-weight:700;font-size:24px;line-height:1.2;letter-spacing:-.015em;color:#fff;margin-bottom:18px">Start with one meaningful operating problem.</div>
+            <p style="margin:0px 0 0;font-size:18px;line-height:1.65;color:rgba(255,255,255,.82);text-wrap:pretty">We choose a problem that matters to the business and can be measured. We map how the work runs today, with the people who do it.</p><p style="margin:14px 0 0;font-size:18px;line-height:1.65;color:rgba(255,255,255,.82);text-wrap:pretty">Then we address what the solution depends on, such as data quality, process rules and ownership, and agree the baseline. This preparation is part of our work.</p>
           </div>
-          <div ref="{{ p2 }}" style="min-height:52vh;padding-bottom:64px;font-size:18px;line-height:1.65;color:rgba(255,255,255,.82);text-wrap:pretty">
-            <div style="font-family:Manrope,sans-serif;font-weight:700;font-size:24px;line-height:1.2;letter-spacing:-.015em;color:#fff;margin-bottom:18px">Architect the right solution.</div>
-            <p style="margin:0 0 0">We act as your honest broker, assessing the capabilities you already own before recommending additional technology.</p><p style="margin:16px 0 0">We determine what belongs in your existing systems, what needs connecting, where conventional automation is sufficient, where AI adds value, and where people retain judgment or approval.</p><p style="margin:16px 0 0">Options are compared on effectiveness, reliability, implementation effort and total operating cost, including licenses, AI usage and maintenance. We explain the tradeoffs and any relevant commercial relationships.</p>
+          <div ref="{{ p2 }}" style="min-height:48vh;padding-bottom:64px">
+            <div style="font-family:Manrope,sans-serif;font-weight:700;font-size:24px;line-height:1.2;letter-spacing:-.015em;color:#fff;margin-bottom:18px">Build the solution and put it into use.</div>
+            <p style="margin:0px 0 0;font-size:18px;line-height:1.65;color:rgba(255,255,255,.82);text-wrap:pretty">We build the interface, integrations, rules, automation and AI the workflow needs.</p><p style="margin:14px 0 0;font-size:18px;line-height:1.65;color:rgba(255,255,255,.82);text-wrap:pretty">Working versions are tested with real users and real scenarios, including exceptions and failed actions. We support rollout and adoption with your team.</p>
           </div>
-          <div ref="{{ p3 }}" style="min-height:52vh;padding-bottom:64px;font-size:18px;line-height:1.65;color:rgba(255,255,255,.82);text-wrap:pretty">
-            <div style="font-family:Manrope,sans-serif;font-weight:700;font-size:24px;line-height:1.2;letter-spacing:-.015em;color:#fff;margin-bottom:18px">Build with the right experts.</div>
-            <p style="margin:0 0 0">The Outcome FDE leads delivery alongside workflow specialists, engineers, AI specialists and experts in your existing technology.</p><p style="margin:16px 0 0">We build the integrations, applications, automations and agents the solution requires, then test working versions with real users and real scenarios, including exceptions and failed actions. We support rollout and adoption with your team.</p>
+          <div ref="{{ p3 }}" style="min-height:48vh;padding-bottom:64px">
+            <div style="font-family:Manrope,sans-serif;font-weight:700;font-size:24px;line-height:1.2;letter-spacing:-.015em;color:#fff;margin-bottom:18px">Measure and improve performance.</div>
+            <p style="margin:0px 0 0;font-size:18px;line-height:1.65;color:rgba(255,255,255,.82);text-wrap:pretty">We track results against the baseline, along with cost, reliability and adoption.</p><p style="margin:14px 0 0;font-size:18px;line-height:1.65;color:rgba(255,255,255,.82);text-wrap:pretty">We resolve issues, maintain integrations, evaluate AI reliability and make agreed improvements.</p>
           </div>
-          <div ref="{{ p4 }}" style="padding-bottom:16px;font-size:18px;line-height:1.65;color:rgba(255,255,255,.82);text-wrap:pretty">
-            <div style="font-family:Manrope,sans-serif;font-weight:700;font-size:24px;line-height:1.2;letter-spacing:-.015em;color:#fff;margin-bottom:18px">Prove it, then build on it.</div>
-            <p style="margin:0 0 0">After launch we monitor results, cost, reliability and adoption, resolve issues and keep improving the workflow.</p><p style="margin:16px 0 0">Once it runs reliably and delivers value, we move to the next workflow together, reusing the data, integrations, infrastructure and knowledge already in place while continuing to support what is live.</p>
+          <div ref="{{ p4 }}" style="padding-bottom:16px">
+            <div style="font-family:Manrope,sans-serif;font-weight:700;font-size:24px;line-height:1.2;letter-spacing:-.015em;color:#fff;margin-bottom:18px">Extend to adjacent workflows.</div>
+            <p style="margin:0px 0 0;font-size:18px;line-height:1.65;color:rgba(255,255,255,.82);text-wrap:pretty">The integrations, controls and knowledge already in place carry into the next problem, so each new workflow starts further ahead.</p><p style="margin:14px 0 0;font-size:18px;line-height:1.65;color:rgba(255,255,255,.82);text-wrap:pretty">We continue to support what is live.</p>
           </div>
         </div>
       </div>
     </sc-if>
-
-    <sc-if value="{{ narrow }}" hint-placeholder-val="{{ false }}">
+    <sc-if value="{{ stickyOff }}" hint-placeholder-val="{{ false }}">
       <div style="position:relative;margin-top:64px;padding-left:32px">
         <div style="position:absolute;left:4px;top:10px;bottom:10px;width:1px;background:#00A8E8"></div>
         <div style="display:grid;gap:48px">
           <div style="position:relative">
             <span style="position:absolute;left:-32px;top:6px;width:9px;height:9px;border-radius:50%;background:#00A8E8"></span>
-            <div style="font-size:13px;font-weight:500;letter-spacing:.1em;color:#00A8E8">01</div>
-            <div style="margin-top:6px;font-family:Manrope,sans-serif;font-weight:700;font-size:23px;line-height:1.2;letter-spacing:-.015em">Understand the work and prepare the foundation.</div>
-            <p style="margin:14px 0 0;font-size:17px;line-height:1.65;color:rgba(255,255,255,.82);text-wrap:pretty">We work alongside your team to map the workflow as it actually runs: the systems, handoffs, decisions and exceptions. Together we agree on the scope and how success will be measured.</p><p style="margin:14px 0 0;font-size:17px;line-height:1.65;color:rgba(255,255,255,.82);text-wrap:pretty">Then we address what the solution depends on: data quality, process rules and ownership. Reliable automation and agents need trustworthy information and a correctly designed workflow. This preparation is part of our work, scoped to the solution.</p>
+            <div style="font-size:13px;font-weight:600;letter-spacing:.1em;color:#00A8E8">01 · Understand &amp; Scope</div>
+            <div style="margin:6px 0 14px;font-family:Manrope,sans-serif;font-weight:700;font-size:23px;line-height:1.25;letter-spacing:-.015em">Start with one meaningful operating problem.</div>
+            <p style="margin:0px 0 0;font-size:17px;line-height:1.65;color:rgba(255,255,255,.82);text-wrap:pretty">We choose a problem that matters to the business and can be measured. We map how the work runs today, with the people who do it.</p><p style="margin:14px 0 0;font-size:17px;line-height:1.65;color:rgba(255,255,255,.82);text-wrap:pretty">Then we address what the solution depends on, such as data quality, process rules and ownership, and agree the baseline. This preparation is part of our work.</p>
           </div>
           <div style="position:relative">
             <span style="position:absolute;left:-32px;top:6px;width:9px;height:9px;border-radius:50%;background:#00A8E8"></span>
-            <div style="font-size:13px;font-weight:500;letter-spacing:.1em;color:#00A8E8">02</div>
-            <div style="margin-top:6px;font-family:Manrope,sans-serif;font-weight:700;font-size:23px;line-height:1.2;letter-spacing:-.015em">Architect the right solution.</div>
-            <p style="margin:14px 0 0;font-size:17px;line-height:1.65;color:rgba(255,255,255,.82);text-wrap:pretty">We act as your honest broker, assessing the capabilities you already own before recommending additional technology.</p><p style="margin:14px 0 0;font-size:17px;line-height:1.65;color:rgba(255,255,255,.82);text-wrap:pretty">We determine what belongs in your existing systems, what needs connecting, where conventional automation is sufficient, where AI adds value, and where people retain judgment or approval.</p><p style="margin:14px 0 0;font-size:17px;line-height:1.65;color:rgba(255,255,255,.82);text-wrap:pretty">Options are compared on effectiveness, reliability, implementation effort and total operating cost, including licenses, AI usage and maintenance. We explain the tradeoffs and any relevant commercial relationships.</p>
+            <div style="font-size:13px;font-weight:600;letter-spacing:.1em;color:#00A8E8">02 · Build &amp; Launch</div>
+            <div style="margin:6px 0 14px;font-family:Manrope,sans-serif;font-weight:700;font-size:23px;line-height:1.25;letter-spacing:-.015em">Build the solution and put it into use.</div>
+            <p style="margin:0px 0 0;font-size:17px;line-height:1.65;color:rgba(255,255,255,.82);text-wrap:pretty">We build the interface, integrations, rules, automation and AI the workflow needs.</p><p style="margin:14px 0 0;font-size:17px;line-height:1.65;color:rgba(255,255,255,.82);text-wrap:pretty">Working versions are tested with real users and real scenarios, including exceptions and failed actions. We support rollout and adoption with your team.</p>
           </div>
           <div style="position:relative">
             <span style="position:absolute;left:-32px;top:6px;width:9px;height:9px;border-radius:50%;background:#00A8E8"></span>
-            <div style="font-size:13px;font-weight:500;letter-spacing:.1em;color:#00A8E8">03</div>
-            <div style="margin-top:6px;font-family:Manrope,sans-serif;font-weight:700;font-size:23px;line-height:1.2;letter-spacing:-.015em">Build with the right experts.</div>
-            <p style="margin:14px 0 0;font-size:17px;line-height:1.65;color:rgba(255,255,255,.82);text-wrap:pretty">The Outcome FDE leads delivery alongside workflow specialists, engineers, AI specialists and experts in your existing technology.</p><p style="margin:14px 0 0;font-size:17px;line-height:1.65;color:rgba(255,255,255,.82);text-wrap:pretty">We build the integrations, applications, automations and agents the solution requires, then test working versions with real users and real scenarios, including exceptions and failed actions. We support rollout and adoption with your team.</p>
+            <div style="font-size:13px;font-weight:600;letter-spacing:.1em;color:#00A8E8">03 · Operate &amp; Improve</div>
+            <div style="margin:6px 0 14px;font-family:Manrope,sans-serif;font-weight:700;font-size:23px;line-height:1.25;letter-spacing:-.015em">Measure and improve performance.</div>
+            <p style="margin:0px 0 0;font-size:17px;line-height:1.65;color:rgba(255,255,255,.82);text-wrap:pretty">We track results against the baseline, along with cost, reliability and adoption.</p><p style="margin:14px 0 0;font-size:17px;line-height:1.65;color:rgba(255,255,255,.82);text-wrap:pretty">We resolve issues, maintain integrations, evaluate AI reliability and make agreed improvements.</p>
           </div>
           <div style="position:relative">
             <span style="position:absolute;left:-32px;top:6px;width:9px;height:9px;border-radius:50%;background:#00A8E8"></span>
-            <div style="font-size:13px;font-weight:500;letter-spacing:.1em;color:#00A8E8">04</div>
-            <div style="margin-top:6px;font-family:Manrope,sans-serif;font-weight:700;font-size:23px;line-height:1.2;letter-spacing:-.015em">Prove it, then build on it.</div>
-            <p style="margin:14px 0 0;font-size:17px;line-height:1.65;color:rgba(255,255,255,.82);text-wrap:pretty">After launch we monitor results, cost, reliability and adoption, resolve issues and keep improving the workflow.</p><p style="margin:14px 0 0;font-size:17px;line-height:1.65;color:rgba(255,255,255,.82);text-wrap:pretty">Once it runs reliably and delivers value, we move to the next workflow together, reusing the data, integrations, infrastructure and knowledge already in place while continuing to support what is live.</p>
+            <div style="font-size:13px;font-weight:600;letter-spacing:.1em;color:#00A8E8">04 · The next workflow</div>
+            <div style="margin:6px 0 14px;font-family:Manrope,sans-serif;font-weight:700;font-size:23px;line-height:1.25;letter-spacing:-.015em">Extend to adjacent workflows.</div>
+            <p style="margin:0px 0 0;font-size:17px;line-height:1.65;color:rgba(255,255,255,.82);text-wrap:pretty">The integrations, controls and knowledge already in place carry into the next problem, so each new workflow starts further ahead.</p><p style="margin:14px 0 0;font-size:17px;line-height:1.65;color:rgba(255,255,255,.82);text-wrap:pretty">We continue to support what is live.</p>
           </div>
         </div>
       </div>
@@ -134,26 +162,22 @@ a{color:#00A8E8;text-decoration:none}a:hover{color:#6BE8C5}
   </div>
 </section>
 
-<section data-screen-label="Who shows up" style="background:#F3F5F8;color:#0A0F2B">
-  <div style="max-width:1280px;margin:0 auto;padding:120px 32px 128px;box-sizing:border-box">
-    <h2 style="margin:0;max-width:860px;font-family:Manrope,sans-serif;font-weight:800;font-size:clamp(34px,3.8vw,50px);line-height:1.08;letter-spacing:-.03em;text-wrap:pretty">One person accountable for the outcome. The right experts beside them.</h2>
-    <p style="margin:32px 0 0;max-width:680px;font-size:19px;line-height:1.6;color:#3C4363;text-wrap:pretty">Forward-deployed engineers are part of our model. What shapes it is the Outcome FDE, supported by the expertise each solution needs, so no one person is expected to be the expert in everything.</p>
-    <div style="margin-top:64px;border-top:1px solid rgba(10,15,43,.18);padding-top:36px;display:flex;flex-wrap:wrap;gap:20px 72px;align-items:flex-start">
-      <h3 style="margin:0;flex:0 0 300px;font-family:Manrope,sans-serif;font-weight:800;font-size:clamp(28px,2.8vw,36px);line-height:1.12;letter-spacing:-.025em">The Outcome FDE.</h3>
-      <p style="margin:0;flex:1 1 380px;max-width:640px;font-size:18px;line-height:1.65;color:#3C4363;text-wrap:pretty">A forward-deployed engineer responsible for the business outcome across the complete workflow. They understand how the work happens, guide the redesign and architecture, coordinate implementation, and remain accountable for adoption and operational performance after launch.</p>
-    </div>
-    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:48px 56px;margin-top:64px">
-      <div style="border-top:1px solid rgba(10,15,43,.18);padding-top:28px">
-        <h3 style="margin:0;font-family:Manrope,sans-serif;font-weight:700;font-size:23px;line-height:1.25;letter-spacing:-.01em">Workflow specialists and FDEs.</h3>
-        <p style="margin:16px 0 0;font-size:17px;line-height:1.65;color:#3C4363;text-wrap:pretty">Workflow specialists know how operational work is structured and where it breaks down. Forward-deployed engineers build the integrations, applications and automations inside your environment, working alongside your team.</p>
-      </div>
-      <div style="border-top:1px solid rgba(10,15,43,.18);padding-top:28px">
-        <h3 style="margin:0;font-family:Manrope,sans-serif;font-weight:700;font-size:23px;line-height:1.25;letter-spacing:-.01em">AI and platform experts.</h3>
-        <p style="margin:16px 0 0;font-size:17px;line-height:1.65;color:#3C4363;text-wrap:pretty">AI specialists design and evaluate where models and agents add value. Experts in the platforms you already run, such as SAP, OneStream, Salesforce or Airtable, make sure the solution works with them as intended.</p>
-      </div>
-      <div style="border-top:1px solid rgba(10,15,43,.18);padding-top:28px">
-        <h3 style="margin:0;font-family:Manrope,sans-serif;font-weight:700;font-size:23px;line-height:1.25;letter-spacing:-.01em">Your people.</h3>
-        <p style="margin:16px 0 0;font-size:17px;line-height:1.65;color:#3C4363;text-wrap:pretty">The process owner who brought the problem, someone from IT, and the people who do the work. They are on the build, not interviewed for it.</p>
+<section data-screen-label="How we choose technology" style="background:#F3F5F8;color:#0A0F2B">
+  <div style="max-width:1280px;margin:0 auto;padding:clamp(80px,10vw,124px) clamp(20px,4vw,32px);box-sizing:border-box">
+    <h2 style="margin:0;max-width:860px;font-family:Manrope,sans-serif;font-weight:800;font-size:clamp(32px,3.6vw,48px);line-height:1.08;letter-spacing:-.03em;text-wrap:pretty">An honest broker for the technology you already own.</h2>
+    <div style="display:flex;flex-wrap:wrap;gap:32px 80px;margin-top:56px;align-items:flex-start">
+      <p style="margin:0;flex:1 1 420px;max-width:620px;font-size:18px;line-height:1.65;color:#3C4363;text-wrap:pretty">We assess what you already have before recommending anything new. The right answer may be a feature in a platform you license, conventional automation, an integration, an external AI service or a custom application. We recommend replacing a system only when the benefit justifies the cost and disruption.</p>
+      <div style="flex:1 1 320px;min-width:0">
+        <div style="font-size:13px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:#0077B6">Every option is compared on</div>
+        <div style="margin-top:16px;display:grid">
+          <div style="border-top:1px solid rgba(10,15,43,.18);padding:12px 0;font-family:Manrope,sans-serif;font-weight:700;font-size:19px">Effectiveness</div>
+          <div style="border-top:1px solid rgba(10,15,43,.18);padding:12px 0;font-family:Manrope,sans-serif;font-weight:700;font-size:19px">Reliability</div>
+          <div style="border-top:1px solid rgba(10,15,43,.18);padding:12px 0;font-family:Manrope,sans-serif;font-weight:700;font-size:19px">Implementation effort</div>
+          <div style="border-top:1px solid rgba(10,15,43,.18);padding:12px 0;font-family:Manrope,sans-serif;font-weight:700;font-size:19px">Licensing</div>
+          <div style="border-top:1px solid rgba(10,15,43,.18);padding:12px 0;font-family:Manrope,sans-serif;font-weight:700;font-size:19px">AI usage</div>
+          <div style="border-top:1px solid rgba(10,15,43,.18);border-bottom:1px solid rgba(10,15,43,.18);padding:12px 0;font-family:Manrope,sans-serif;font-weight:700;font-size:19px">Maintenance</div>
+        </div>
+        <p style="margin:14px 0 0;font-size:17px;line-height:1.65;color:#3C4363;text-wrap:pretty;font-size:16px;margin-top:20px">We explain the alternatives, the tradeoffs and any relevant commercial relationships.</p>
       </div>
     </div>
   </div>
@@ -176,21 +200,21 @@ a{color:#00A8E8;text-decoration:none}a:hover{color:#6BE8C5}
 </section>
 
 <section id="close" data-screen-label="Close" style="border-top:1px solid rgba(255,255,255,.08)">
-  <div style="max-width:1280px;margin:0 auto;padding:128px 32px;box-sizing:border-box">
-    <h2 style="margin:0;max-width:860px;font-family:Manrope,sans-serif;font-weight:800;font-size:clamp(36px,4.4vw,58px);line-height:1.06;letter-spacing:-.03em;text-wrap:pretty">Start with the work. We will help shape the rest.</h2>
-    <p style="margin:28px 0 0;max-width:640px;font-size:18px;line-height:1.6;color:rgba(255,255,255,.8);text-wrap:pretty">You do not need a scoped project to begin. Tell us where work is slow, costly or hard to run, and we will help define what to build first.</p>
+  <div style="max-width:1280px;margin:0 auto;padding:clamp(80px,10vw,124px) clamp(20px,4vw,32px);box-sizing:border-box">
+    <h2 style="margin:0;max-width:860px;font-family:Manrope,sans-serif;font-weight:800;font-size:clamp(32px,3.6vw,48px);line-height:1.08;letter-spacing:-.03em;text-wrap:pretty;font-size:clamp(36px,4.4vw,58px);line-height:1.06">Start with one problem.</h2>
+    <p style="margin:28px 0 0;max-width:660px;font-size:18px;line-height:1.6;color:rgba(255,255,255,.8);text-wrap:pretty">You don't need to know the exact cost, the owner or the technical answer yet. The first conversation is about understanding the problem: where work is slow or costly, who it affects and which systems are involved. From there, we'll recommend the right next step.</p>
     <div style="margin-top:40px;display:flex;flex-wrap:wrap;align-items:center;gap:20px 36px">
-      <a href="mailto:hello@brilliant.ai" style="display:inline-block;background:#00A8E8;color:#0A0F2B;font-weight:600;font-size:16px;padding:15px 28px;border-radius:999px" style-hover="background:#6BE8C5;color:#0A0F2B">Start a conversation</a>
-      <a href="/what-we-do" style="font-size:17px;font-weight:500;color:#00A8E8" style-hover="color:#6BE8C5">See what we build →</a>
+      <a href="mailto:hello@brilliant.ai?subject=One%20problem" style="display:inline-block;background:#00A8E8;color:#0A0F2B;font-weight:600;font-size:16px;padding:15px 28px;border-radius:999px" style-hover="background:#6BE8C5;color:#0A0F2B">Bring us one problem</a>
+      <a href="mailto:hello@brilliant.ai" style="font-size:17px;font-weight:500;color:#00A8E8" style-hover="color:#6BE8C5">hello@brilliant.ai</a>
     </div>
   </div>
 </section>
 
 <footer style="border-top:1px solid rgba(255,255,255,.1)">
-  <div style="max-width:1280px;margin:0 auto;padding:48px 32px 56px;box-sizing:border-box;display:flex;flex-wrap:wrap;gap:32px 64px;align-items:flex-start;justify-content:space-between">
+  <div style="max-width:1280px;margin:0 auto;padding:48px clamp(20px,4vw,32px) 56px;box-sizing:border-box;display:flex;flex-wrap:wrap;gap:32px 64px;align-items:flex-start;justify-content:space-between">
     <div style="flex:1 1 320px;min-width:0;max-width:420px">
       <img src="/assets/lockup-white.png" alt="brilliant.ai" style="height:26px;display:block">
-      <p style="margin:18px 0 0;font-size:15px;line-height:1.55;color:rgba(255,255,255,.62);text-wrap:pretty">Rebuilding the workflows behind the enterprise's biggest problems.</p>
+      <p style="margin:18px 0 0;font-size:15px;line-height:1.55;color:rgba(255,255,255,.66);text-wrap:pretty">Platform first. AI forward. Rebuilding the workflows behind known operating problems.</p>
     </div>
     <div style="display:flex;flex-wrap:wrap;gap:16px 32px;font-size:15px;align-items:center">
       <a href="/" style="color:rgba(255,255,255,.72)" style-hover="color:#fff">Home</a>
@@ -205,15 +229,15 @@ a{color:#00A8E8;text-decoration:none}a:hover{color:#6BE8C5}
   </div>
 </footer>
 </x-dc>
-<script type="text/x-dc" data-dc-script data-props="{&quot;stickyStages&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Sequence&quot;}}">
+<script type="text/x-dc" data-dc-script data-props="{&quot;stickyStages&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Progression&quot;}}">
 class Component extends DCLogic {
-  state = { wide: true, progress: 0, active: 1 };
-  trackRef = React.createRef(); p1 = React.createRef(); p2 = React.createRef(); p3 = React.createRef(); p4 = React.createRef();
+  state = { wide: typeof window !== 'undefined' ? window.matchMedia('(min-width: 1040px)').matches : true, menu: false, progress: 0, active: 1 };
   componentDidMount() {
     this.mq = window.matchMedia('(min-width: 1040px)');
-    this.onResize = () => { const w = this.mq.matches; if (w !== this.state.wide) this.setState({ wide: w }); this.onScroll(); };
-    this.mq.addEventListener('change', this.onResize);
-    window.addEventListener('resize', this.onResize);
+    this.onMq = () => { const w = this.mq.matches; if (w !== this.state.wide) this.setState({ wide: w, menu: false }); if (this.onScroll) this.onScroll(); };
+    this.mq.addEventListener('change', this.onMq);
+    window.addEventListener('resize', this.onMq);
+    this.onMq();
     this.reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     this.onScroll = () => {
       if (this.raf) return;
@@ -229,20 +253,22 @@ class Component extends DCLogic {
       });
     };
     window.addEventListener('scroll', this.onScroll, { passive: true });
-    this.onResize();
+    this.onScroll();
   }
   componentWillUnmount() {
-    this.mq && this.mq.removeEventListener('change', this.onResize);
-    window.removeEventListener('resize', this.onResize);
+    this.mq && this.mq.removeEventListener('change', this.onMq);
+    window.removeEventListener('resize', this.onMq);
     window.removeEventListener('scroll', this.onScroll);
   }
+  trackRef = React.createRef(); p1 = React.createRef(); p2 = React.createRef(); p3 = React.createRef(); p4 = React.createRef();
   renderVals() {
-    const { wide, progress, active } = this.state;
-    const sticky = this.props.stickyStages ?? true;
-    const on = n => (active >= n ? 'on' : 'off');
-    return { wide: wide && sticky, narrow: !(wide && sticky), progress: progress.toFixed(3),
-      trackRef: this.trackRef, p1: this.p1, p2: this.p2, p3: this.p3, p4: this.p4,
-      s1: on(1), s2: on(2), s3: on(3), s4: on(4) };
+    const wide = this.state.wide, menuOpen = this.state.menu && !wide;
+    return Object.assign({
+      wide, narrow: !wide, menuOpen,
+      menuLabel: menuOpen ? 'Close' : 'Menu',
+      toggleMenu: () => this.setState(s => ({ menu: !s.menu })),
+      closeMenu: () => this.setState({ menu: false })
+    }, (() => { const sticky = (this.props.stickyStages ?? true) && wide; const a = this.state.active; const on = n => (a >= n ? 'on' : 'off'); return { stickyOn: sticky, stickyOff: !sticky, progress: this.state.progress.toFixed(3), trackRef: this.trackRef, p1: this.p1, p2: this.p2, p3: this.p3, p4: this.p4, s1: on(1), s2: on(2), s3: on(3), s4: on(4) }; })());
   }
 }
 </script>
